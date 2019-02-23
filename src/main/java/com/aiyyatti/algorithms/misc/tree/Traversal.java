@@ -1,8 +1,7 @@
-package com.lazycoder.algorithms.misc.tree;
+package com.aiyyatti.algorithms.misc.tree;
 
-import com.lazycoder.algorithms.common.tree.TreeNode;
+import com.aiyyatti.algorithms.common.tree.TreeNode;
 import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.Test;
 
 public class Traversal {

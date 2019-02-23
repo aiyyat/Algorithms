@@ -1,8 +1,6 @@
-package com.lazycoder.algorithms.common.tree;
+package com.aiyyatti.algorithms.common.tree;
 
 import org.junit.Test;
-
-import java.text.MessageFormat;
 
 public class TreeNode {
     private TreeNode left;
