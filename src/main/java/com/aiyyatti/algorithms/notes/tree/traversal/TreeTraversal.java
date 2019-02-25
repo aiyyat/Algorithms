@@ -1,10 +1,13 @@
-package com.aiyyatti.algorithms.misc.tree;
+package com.aiyyatti.algorithms.notes.tree.traversal;
 
-import com.aiyyatti.algorithms.common.tree.TreeNode;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-public class Traversal {
+/**
+ * Question:
+ * Different types of Tree Traversals
+ */
+public class TreeTraversal {
     /**
      * Time Complexity: O(n)
      *
@@ -38,11 +41,9 @@ public class Traversal {
         return postOrder(root.left()) + postOrder(root.right()) + root.dataStr() + " ";
     }
 
-    @FunctionalInterface
-    interface Trim {
-        public String apply();
-    }
-    // Test cases
+    ///////////////
+    // Test cases//
+    ///////////////
     public TreeNode simple() {
         TreeNode n0 = new TreeNode(0);
         TreeNode n1 = new TreeNode(1);
@@ -59,6 +60,7 @@ public class Traversal {
         n2.right(n5);
         return n1;
     }
+
     @Test
     public void preOrderSimpleTest() {
         TestCase.assertEquals("1 2 4 5 3", preOrder(simple()));
@@ -73,4 +75,62 @@ public class Traversal {
     public void postOrderSimpleTest() {
         TestCase.assertEquals("4 5 2 3 1", postOrder(simple()));
     }
-}
+
+    ////////////////////
+    // DATA STRUCTURE //
+    ////////////////////
+    class TreeNode {
+        private TreeNode left;
+        private TreeNode right;
+        private int data;
+
+        public TreeNode(int data) {
+            this.data = data;
+        }
+
+        public TreeNode(int data, TreeNode left, TreeNode right) {
+            this(data);
+            this.left = left;
+            this.right = right;
+        }
+
+        // Use instead of standard accessors to make it more precise
+        public void left(TreeNode left) {
+            this.left = left;
+        }
+
+        public void right(TreeNode right) {
+            this.right = right;
+        }
+
+        public TreeNode left() {
+            return this.left;
+        }
+
+        public TreeNode right() {
+            return this.right;
+        }
+
+        public int data() {
+            return data;
+        }
+
+        public String dataStr() {
+            return "" + data;
+        }
+
+        @Override
+        public String toString() {
+            return "" + data;
+        }
+
+        public String toTreeString() {
+            return "";
+        }
+
+        @Test
+        public void printSimple() {
+            TreeNode n1 = new TreeNode(5, new TreeNode(4), new TreeNode(6));
+            System.out.println(n1.toTreeString());
+        }
+    }
