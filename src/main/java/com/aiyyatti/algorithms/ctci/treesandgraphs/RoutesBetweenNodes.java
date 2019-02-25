@@ -12,21 +12,51 @@ import java.util.*;
  * to find out whether there is a route between two nodes.
  */
 public class RoutesBetweenNodes {
-    public boolean isConnected(DiGraph graph, Vertex start, Vertex end) {
+    /**
+     * DFS without queues
+     * Time Complexity: O(V+E)
+     *
+     * @param graph
+     * @param start
+     * @param end
+     * @return
+     */
+    public boolean isDFSConnected(DiGraph graph, Vertex start, Vertex end) {
+        if (start == end) {
+            return true;
+        }
         boolean found = false;
-        for (Vertex vertex : graph.edges(start)) {
+        for (Vertex vertex : graph.getEdges(start)) {
             if (found) {
                 return found;
             } else if (!vertex.isVisited()) {
                 vertex.markVisited();
-                if (vertex == end) {
-                    return true;
-                } else {
-                    found |= isConnected(graph, vertex, end);
-                }
+                found |= isDFSConnected(graph, vertex, end);
             }
         }
         return found;
+    }
+
+    /**
+     * BFS
+     * Time Complexity: O(V+E)
+     *
+     * @param graph
+     * @param start
+     * @param end
+     * @return
+     */
+    public boolean isBFSConnected(DiGraph graph, Vertex start, Vertex end) {
+        Queue<Vertex> queue = new LinkedList<>();
+        ((LinkedList<Vertex>) queue).add(start);
+        while (!queue.isEmpty()) {
+            Vertex vertex = queue.poll();
+            if (vertex == end) {
+                return true;
+            }
+            queue.addAll(graph.getEdges(vertex));
+        }
+        return false;
     }
 
     ////////////////////
@@ -73,7 +103,7 @@ public class RoutesBetweenNodes {
     class DiGraph {
         private Map<Vertex, LinkedList<Vertex>> edges = new HashMap<>();
 
-        public void edge(Vertex start, Vertex end) {
+        public void addEdge(Vertex start, Vertex end) {
             if (!edges.containsKey(start)) {
                 LinkedList<Vertex> startChildren = new LinkedList<>();
                 edges.put(start, startChildren);
@@ -87,10 +117,11 @@ public class RoutesBetweenNodes {
             return edges.keySet();
         }
 
-        public List<Vertex> edges(Vertex start) {
+        public List<Vertex> getEdges(Vertex start) {
             LinkedList<Vertex> vertices = edges.get(start);
             return vertices == null ? Collections.EMPTY_LIST : vertices;
         }
+
     }
 
     ////////////////
@@ -111,27 +142,37 @@ public class RoutesBetweenNodes {
     @Before
     public void init() {
         graph = new DiGraph();
-        graph.edge(v1, v2);
-        graph.edge(v1, v3);
-        graph.edge(v4, v5);
-        graph.edge(v4, v0);
-        graph.edge(v4, v5);
-        graph.edge(v5, v6);
-        graph.edge(v0, v6);
-        graph.edge(v3, v9);
-        graph.edge(v3, v7);
-        graph.edge(v9, v7);
-        graph.edge(v7, v8);
-        graph.edge(v8, v6);
+        graph.addEdge(v1, v2);
+        graph.addEdge(v1, v3);
+        graph.addEdge(v4, v5);
+        graph.addEdge(v4, v0);
+        graph.addEdge(v4, v5);
+        graph.addEdge(v5, v6);
+        graph.addEdge(v0, v6);
+        graph.addEdge(v3, v9);
+        graph.addEdge(v3, v7);
+        graph.addEdge(v9, v7);
+        graph.addEdge(v7, v8);
+        graph.addEdge(v8, v6);
     }
 
     @Test
-    public void connectedSimple() {
-        TestCase.assertTrue(isConnected(graph, v1, v6));
+    public void connectedSimpleDFS() {
+        TestCase.assertTrue(isDFSConnected(graph, v1, v6));
     }
 
     @Test
-    public void notConnectedSimple() {
-        TestCase.assertFalse(isConnected(graph, v6, v1));
+    public void notConnectedSimpleDFS() {
+        TestCase.assertFalse(isDFSConnected(graph, v6, v1));
+    }
+
+    @Test
+    public void connectedSimpleBFS() {
+        TestCase.assertTrue(isDFSConnected(graph, v1, v6));
+    }
+
+    @Test
+    public void notConnectedSimpleBFS() {
+        TestCase.assertFalse(isDFSConnected(graph, v6, v1));
     }
 }
