@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.notes.tree.traversal;
+package com.aiyyatti.algorithms.tree.misc;
 
 import junit.framework.TestCase;
 import org.junit.Test;

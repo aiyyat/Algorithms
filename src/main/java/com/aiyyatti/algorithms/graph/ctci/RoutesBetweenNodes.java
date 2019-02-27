@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.ctci.treesandgraphs;
+package com.aiyyatti.algorithms.graph.ctci;
 
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.util.*;
 
 /**
- * Question:
  * Route Between Nodes: Given a directed graph, design an algorithm
  * to find out whether there is a route between two nodes.
  */

@@ -1,19 +1,16 @@
-package com.aiyyatti.algorithms.notes.tree.traversal;
+package com.aiyyatti.algorithms.tree.ctci;
 
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import java.util.Stack;
-
 /**
- *
+ * List of Depths: Given a binary tree, design an algorithm which creates a linked list of all the nodes
+ * at each depth (e.g., if you have a tree with depth 0, you'll have 0 linked lists).
  */
-public class InOrderTraversalWithoutRecustion {
-    private String doInOrderTraversalWithoutRecursion() {
-        Stack<Node> stack = new Stack<>();
+public class ListOfDepths {
+    public String doListOfDepths() {
         return null;
     }
-
     ///////////////
     // TEST CASE //
     ///////////////
@@ -35,7 +32,7 @@ public class InOrderTraversalWithoutRecustion {
         n0.right(n5);
         n5.left(n6);
         n5.right(n7);
-        TestCase.assertEquals("2 1 4 3 0 6 5 7", doInOrderTraversalWithoutRecursion());
+        TestCase.assertEquals("2 1 4 3 0 6 5 7", doListOfDepths());
     }
 
     ////////////////////
@@ -71,5 +68,4 @@ public class InOrderTraversalWithoutRecustion {
             return data.toString();
         }
     }
-
 }
