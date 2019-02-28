@@ -59,7 +59,7 @@ public class ListOfDepths {
             this.left = left;
         }
 
-        public void right(Node left) {
+        public void right(Node right) {
             this.right = right;
         }
 

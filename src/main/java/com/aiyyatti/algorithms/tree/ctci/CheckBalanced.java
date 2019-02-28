@@ -8,6 +8,8 @@ import org.junit.Test;
  * Check Balanced: Implement a function to check if a binary tree is balanced. For the purposes of
  * this question, a balanced tree is defined to be a tree such that the heights of the two subtrees of any
  * node never differ by more than one.
+ *
+ * TODO: need to ensure each node has left - right is 1 or 0 not just the root.
  */
 public class CheckBalanced {
     public boolean doCheckBalanced(Node root) {
@@ -18,14 +20,14 @@ public class CheckBalanced {
         return false;
     }
 
+    /**
+     * Time Complexity: O(n)
+     * @param root
+     * @return
+     */
     public int checkBalanced(Node root) {
         if (root == null) return 0;
         else return (checkBalanced(root.left) - checkBalanced(root.right) + 1);
-    }
-
-    int height(Node root) {
-        if (root == null) return 0;
-        else return Math.max(height(root.left), height(root.right)) + 1;
     }
 
     ///////////////
