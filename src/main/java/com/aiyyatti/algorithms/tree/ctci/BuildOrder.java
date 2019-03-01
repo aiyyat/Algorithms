@@ -12,19 +12,12 @@ import java.util.stream.Collectors;
  * projects, where the second project is dependent on the first project). All of a project's dependencies
  * must be built before the project is. Find a build order that will allow the projects to be built. If there
  * is no valid build order, return an error.
+ * <p>
+ * TODO: If the dependency was maintainted as a separate Data structure like a map it would have been much easier and efficient to solve the problem
  */
 public class BuildOrder {
-    @Test
-    public void simpleTest() {
-        Project fileWriter = new Project("File Writer");
-        Project consoleWriter = new Project("Console Writer");
-        Project logger = new Project("Logger", fileWriter, consoleWriter);
-        Project appleMaps = new Project("Apple Maps", logger);
-        Project grl = new Project("Global Resource Locator", appleMaps, logger);
-        Project appleDotCom = new Project("appleDotCom", grl);
-        BuildTool buildTool = new BuildTool(consoleWriter, logger, appleDotCom, fileWriter, appleMaps, grl);
-        String output = Arrays.stream(buildTool.doBuild()).map(Project::toString).collect(Collectors.joining("->"));
-        TestCase.assertEquals("Console Writer->File Writer->Logger->Apple Maps->Global Resource Locator->appleDotCom", output);
+    enum Status {
+        NOT_BUILT, BUILT
     }
 
     class BuildTool {
@@ -81,7 +74,19 @@ public class BuildOrder {
         }
     }
 
-    enum Status {
-        NOT_BUILT, BUILT
+    ////////////////
+    // TEST CASES //
+    ////////////////
+    @Test
+    public void simpleTest() {
+        Project fileWriter = new Project("File Writer");
+        Project consoleWriter = new Project("Console Writer");
+        Project logger = new Project("Logger", fileWriter, consoleWriter);
+        Project appleMaps = new Project("Apple Maps", logger);
+        Project grl = new Project("Global Resource Locator", appleMaps, logger);
+        Project appleDotCom = new Project("appleDotCom", grl);
+        BuildTool buildTool = new BuildTool(consoleWriter, logger, appleDotCom, fileWriter, appleMaps, grl);
+        String output = Arrays.stream(buildTool.doBuild()).map(Project::toString).collect(Collectors.joining("->"));
+        TestCase.assertEquals("Console Writer->File Writer->Logger->Apple Maps->Global Resource Locator->appleDotCom", output);
     }
 }

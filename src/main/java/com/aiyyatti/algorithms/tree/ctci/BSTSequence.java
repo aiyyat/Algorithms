@@ -23,6 +23,9 @@ public class BSTSequence {
         return false;
     }
 
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleNotBSTTest() {
         Node n0 = new Node(0);
