@@ -8,26 +8,31 @@ import org.junit.Test;
  * Check Balanced: Implement a function to check if a binary tree is balanced. For the purposes of
  * this question, a balanced tree is defined to be a tree such that the heights of the two subtrees of any
  * node never differ by more than one.
- *
- * TODO: need to ensure each node has left - right is 1 or 0 not just the root.
+ * <p>
+ * FIXME
+ * Implementation should go by the definition.
  */
 public class CheckBalanced {
-    public boolean doCheckBalanced(Node root) {
-        int heightDiff = checkBalanced(root);
-        if (heightDiff == 0 || heightDiff == 1) {
-            return true;
-        }
-        return false;
-    }
-
     /**
-     * Time Complexity: O(n)
+     * return the difference between left and right subtrees if it is 0 or 1 then return that value
+     *
      * @param root
      * @return
      */
-    public int checkBalanced(Node root) {
+    public boolean doCheckBalanced(Node root) {
+        return heightDiff(root) != -1;
+    }
+
+    public int heightDiff(Node root) {
         if (root == null) return 0;
-        else return (checkBalanced(root.left) - checkBalanced(root.right) + 1);
+        else {
+            int heightLeft = heightDiff(root.left) + 1;
+            int heightRight = heightDiff(root.right) + 1;
+            if (heightLeft - heightRight > 1) {
+                return -1;
+            }
+            return Math.max(heightLeft, heightRight);
+        }
     }
 
     ///////////////
@@ -43,14 +48,15 @@ public class CheckBalanced {
         Node n5 = new Node(5);
         Node n6 = new Node(6);
         Node n7 = new Node(7);
+        Node n8 = new Node(8);
         n0.left(n1);
         n0.right(n5);
         n1.left(n2);
         n1.right(n3);
         n3.right(n4);
-        n0.right(n5);
         n5.left(n6);
         n5.right(n7);
+        n4.left(n8);
         TestCase.assertFalse(doCheckBalanced(n0));
     }
 
@@ -65,12 +71,12 @@ public class CheckBalanced {
         Node n6 = new Node(6);
         Node n7 = new Node(7);
         n0.left(n1);
-        n0.right(n2);
-        n1.left(n3);
-        n1.right(n4);
-        n3.right(n7);
-        n2.left(n5);
-        n2.right(n6);
+        n0.right(n5);
+        n1.left(n2);
+        n1.right(n3);
+        n3.right(n4);
+        n5.left(n6);
+        n5.right(n7);
         TestCase.assertTrue(doCheckBalanced(n0));
     }
 

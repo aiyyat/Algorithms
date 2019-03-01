@@ -11,7 +11,10 @@ import java.util.List;
  * List of Depths: Given a binary tree, design an algorithm which creates a linked list of all the nodes
  * at each depth (e.g., if you have a tree with depth 0, you'll have 0 linked lists).
  * <p>
- * TODO: output.get(level) will throw java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0 so check for size.
+ * <p>
+ * FIXME:
+ * output.get(level) will throw java.lang.IndexOutOfBoundsException: Index 0
+ * out of bounds for length 0 so check for size.
  */
 public class ListOfDepths {
     public List<LinkedList<Node>> doListOfDepths(Node root) {
@@ -20,6 +23,13 @@ public class ListOfDepths {
         return output;
     }
 
+    /**
+     * Time Complexity: O(n)
+     *
+     * @param root
+     * @param output
+     * @param level
+     */
     public void doListOfDepths(Node root, ArrayList<LinkedList<Node>> output, int level) {
         if (root == null) return;
         LinkedList<Node> entry = null;

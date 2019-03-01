@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
- * Question:
  * Different types of Tree Traversals
  */
 public class TreeTraversal {

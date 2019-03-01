@@ -9,6 +9,10 @@ import java.util.*;
 /**
  * Route Between Nodes: Given a directed graph, design an algorithm
  * to find out whether there is a route between two nodes.
+ *
+ * FIXME
+ *  Do not try to implement a Separate DS for Graph which is generic in nature.
+ *  Just mention that it could be implemented that way during an interview.
  */
 public class RoutesBetweenNodes {
     /**
