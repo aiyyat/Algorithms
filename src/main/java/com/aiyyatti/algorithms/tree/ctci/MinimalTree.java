@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an algorithm
  * to create a binary search tree with minimal height
  *
- *  FIXME:
+ *  TODO:
  *      public Node doMinimalTree(int start, int end, int[] input) => end not end-1
  */
 public class MinimalTree {
