@@ -1,7 +1,6 @@
 package com.aiyyatti.algorithms.tree.ctci;
 
 import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -14,11 +13,9 @@ public class FirstCommonAncestor {
     // APPROACH 1 //
     ////////////////
     public Node commonAncestor1(Node root, Node a, Node b) {
-        if (root == null) return null;
-        if (root == a && root == b) return root;
-        if (root == a || root == b) return root;
-        boolean isAOnLeft = isIn(root.left, a);
-        boolean isBOnLeft = isIn(root.left, b);
+        if (root == null || root == a || root == b) return root;
+        boolean isAOnLeft = isInTree(root.left, a);
+        boolean isBOnLeft = isInTree(root.left, b);
         if (isAOnLeft && isBOnLeft) {
             return commonAncestor1(root.left, a, b);
         } else if (!isAOnLeft && !isBOnLeft) {
@@ -28,14 +25,24 @@ public class FirstCommonAncestor {
         }
     }
 
-    public boolean isIn(Node root, Node node) {
+    public boolean isInTree(Node root, Node node) {
         if (root == null) return false;
         if (root == node) return true;
-        return isIn(root.left, node) || isIn(root.right, node);
+        return isInTree(root.left, node) || isInTree(root.right, node);
     }
+
     ////////////////
     // APPROACH 2 //
     ////////////////
+    public Node commonAncestor2(Node root, Node a, Node b) {
+        if (root == null || root == a || root == b) return root;
+        Node first = commonAncestor2(root.left, a, b);
+        Node second = commonAncestor2(root.right, a, b);
+        if (first == null && second == null) return null;
+        else if (first == null || second == null) {
+            return first==null?second:first;
+        } else return root;
+    }
 
     ////////////////
     // Test CASES //
@@ -68,6 +75,7 @@ public class FirstCommonAncestor {
         n4.left(n5);
         n4.right(n6);
         TestCase.assertEquals(n7, commonAncestor1(n0, n9, n7));
+        TestCase.assertEquals(n7, commonAncestor2(n0, n9, n7));
     }
 
     @Test
@@ -98,6 +106,7 @@ public class FirstCommonAncestor {
         n4.left(n5);
         n4.right(n6);
         TestCase.assertEquals(n7, commonAncestor1(n0, n8, n10));
+        TestCase.assertEquals(n7, commonAncestor2(n0, n8, n10));
     }
 
 
