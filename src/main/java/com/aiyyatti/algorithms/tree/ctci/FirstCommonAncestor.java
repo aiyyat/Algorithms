@@ -12,6 +12,14 @@ public class FirstCommonAncestor {
     ////////////////
     // APPROACH 1 //
     ////////////////
+
+    /**
+     * Time Complexity O()
+     * @param root
+     * @param a
+     * @param b
+     * @return
+     */
     public Node commonAncestor1(Node root, Node a, Node b) {
         if (root == null || root == a || root == b) return root;
         boolean isAOnLeft = isInTree(root.left, a);
@@ -34,13 +42,26 @@ public class FirstCommonAncestor {
     ////////////////
     // APPROACH 2 //
     ////////////////
+
+    /**
+     * Find the first match, then find the second match on the In Order traversal.
+     * During the Post Order Traversal check for non null values.
+     * This doesn't however work if one of the values is non existant on the tree.
+     *
+     * Time Complexity O(n)
+     *
+     * @param root
+     * @param a
+     * @param b
+     * @return
+     */
     public Node commonAncestor2(Node root, Node a, Node b) {
         if (root == null || root == a || root == b) return root;
         Node first = commonAncestor2(root.left, a, b);
         Node second = commonAncestor2(root.right, a, b);
         if (first == null && second == null) return null;
         else if (first == null || second == null) {
-            return first==null?second:first;
+            return first == null ? second : first;
         } else return root;
     }
 
