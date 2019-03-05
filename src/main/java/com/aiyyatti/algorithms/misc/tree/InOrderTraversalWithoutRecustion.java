@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tree.misc;
+package com.aiyyatti.algorithms.misc.tree;
 
 import junit.framework.TestCase;
 import org.junit.Test;

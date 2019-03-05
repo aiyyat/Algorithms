@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tree.ctci;
+package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
 /**
  * Successor: Write an algorithm to find the "next" node (i.e., in-order successor) of a given node in a

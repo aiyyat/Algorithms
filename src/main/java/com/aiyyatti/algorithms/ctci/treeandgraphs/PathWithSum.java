@@ -1,9 +1,8 @@
-package com.aiyyatti.algorithms.tree.ctci;
+package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**

@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tree.ctci;
+package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
 import junit.framework.TestCase;
 import org.junit.Test;
