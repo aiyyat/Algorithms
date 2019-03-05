@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tree.ctci;
+package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -13,7 +13,6 @@ import org.junit.Test;
  */
 public class CheckSubtree {
     public boolean isSubTree(Node t1, Node t2) {
-        System.out.printf("%s %s ", t1, t2);
         if (t1 == null) return false;
         if (t2 == null) return true;
         boolean output = false;
@@ -160,7 +159,7 @@ public class CheckSubtree {
         t3.right(t4);
         t5.left(t6);
         t5.right(t7);
-        TestCase.assertTrue(isSubTree(n0, t0));
+        TestCase.assertFalse(isSubTree(n0, t0));
     }
 
     ////////////////////
