@@ -10,8 +10,31 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
+ * <p>
+ * TODO: redo took a lot of time.
+ */
 public class KnapSack {
-    Logger logger = LoggerFactory.getLogger(KnapSack.class);
+    private Logger logger = LoggerFactory.getLogger(KnapSack.class);
+
+    /////////////////
+    // WITH MATRIX //
+    /////////////////
+    public int findBestValueWithMatrix(int[] value, int[] weight, int W) {
+        int MAX_ROW = weight.length + 1;
+        int MAX_COL = W + 1;
+        int[][] valueMatrix = new int[MAX_ROW][MAX_COL];
+        for (int row = 1; row < MAX_ROW; row++) {
+            for (int column = 1; column < MAX_COL; column++) {
+                if (weight[row - 1] > column) valueMatrix[row][column] = valueMatrix[row - 1][column];
+                else
+                    valueMatrix[row][column] = Math.max(value[row - 1] + valueMatrix[row - 1][column - weight[row - 1]],
+                            valueMatrix[row - 1][column]);
+            }
+        }
+        return valueMatrix[MAX_ROW - 1][MAX_COL - 1];
+    }
 
     //////////////////////////
     // WITHOUT MEMONIZATION //
@@ -46,6 +69,7 @@ public class KnapSack {
         int W = 50;
         int[][] table = new int[value.length + 1][weight.length + 1];
         TestCase.assertEquals(220, findBestValueWithoutMemonization(value, weight, W));
+        TestCase.assertEquals(220, findBestValueWithMatrix(value, weight, W));
     }
 
     @Test
@@ -55,6 +79,8 @@ public class KnapSack {
         int W = 10;
         int[][] table = new int[value.length + 1][weight.length + 1];
         TestCase.assertEquals(90, findBestValueWithoutMemonization(value, weight, W));
+        TestCase.assertEquals(90, findBestValueWithMatrix(value, weight, W));
+
     }
 
     @Test
@@ -64,5 +90,6 @@ public class KnapSack {
         int W = 25;
         int[][] table = new int[value.length + 1][weight.length + 1];
         TestCase.assertEquals(36, findBestValueWithoutMemonization(value, weight, W));
+        TestCase.assertEquals(36, findBestValueWithMatrix(value, weight, W));
     }
 }
