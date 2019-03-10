@@ -1,10 +1,9 @@
-package com.aiyyatti.algorithms.misc.companies.aws;
+package com.aiyyatti.algorithms.tests.aws;
 
 import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * The sieve of Eratosthenes algorithm generates all the primes up to a given limit.

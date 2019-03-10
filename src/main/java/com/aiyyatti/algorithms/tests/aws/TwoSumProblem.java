@@ -1,6 +1,5 @@
-package com.aiyyatti.algorithms.misc.companies.aws;
+package com.aiyyatti.algorithms.tests.aws;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

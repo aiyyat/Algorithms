@@ -1,5 +1,6 @@
 package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
+import com.aiyyatti.algorithms.annotation.Tree;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -9,8 +10,8 @@ import org.junit.Test;
  * arrays that could have led to this tree.
  * <p>
  * Time Complexity: O(n)
- *
  */
+@Tree
 public class BSTSequence {
     public boolean isBST(Node root) {
         if (root == null ||
