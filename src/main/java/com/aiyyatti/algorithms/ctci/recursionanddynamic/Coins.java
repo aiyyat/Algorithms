@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.misc.recursionanddynamic.recursionanddynamicprogrammic;
+package com.aiyyatti.algorithms.ctci.recursionanddynamic;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Coins: Given an innnite number of quarters (25 cents), dimes (10 cents), nickels (5 cents), and
+ * Coins: Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents), and
  * pennies (1 cent), write code to calculate the number of ways of representing n cents.
  */
 public class Coins {

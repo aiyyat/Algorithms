@@ -1,9 +1,11 @@
-package com.aiyyatti.algorithms.misc.tree;
+package com.aiyyatti.algorithms.gog.misc;
 
 import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
+ * https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+ * <p>
  * Different types of Tree Traversals
  */
 public class TreeTraversal {

@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.misc.tree;
+package com.aiyyatti.algorithms.gog.misc;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.Stack;
 
 /**
+ * https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
+ *
  * InOrder Traversal without Recursion
  */
 public class InOrderTraversalWithoutRecustion {

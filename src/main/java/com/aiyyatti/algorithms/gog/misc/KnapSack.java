@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.misc.recursionanddynamic;
+package com.aiyyatti.algorithms.gog.misc;
 
 import junit.framework.TestCase;
 import org.junit.Test;
