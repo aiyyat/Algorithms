@@ -1,5 +1,6 @@
 package com.aiyyatti.algorithms.gog.mustdocodingquestions.arrays;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -66,21 +67,27 @@ public class BuyAndSellStock {
             }
         }
     }
-
     public void doBuyAndSellStock(int N, int[] a) {
         int localMax = 0;
         int localMin = 0;
-        boolean foundABuySell = false;
+        StringBuilder sb = new StringBuilder("");
         for (int i = 0; i < N; i++) {
-            if (a[i] < a[localMin]) localMax = localMin = i;
-            if (a[i] > a[localMax]) localMax = i;
-            if ((i == N - 1 || a[i] > a[i + 1]) && localMax > localMin) {
-                System.out.printf("(%s %s) ", localMin, localMax);
-                foundABuySell = true;
+            if (a[localMin] > a[i]) localMin = i;
+            if (a[localMax] < a[i]) localMax = i;
+            if (i == N - 1 || a[i + 1] < a[i]) {
+                if (localMax != localMin) sb.append(String.format("(%s %s) ", localMin, localMax));
                 if (i < N - 1) localMax = localMin = i + 1;
             }
         }
-        if (!foundABuySell) System.out.println("No Profit");
-        System.out.println();
+        String output = sb.toString().trim();
+        if(output.equals("")) output = "No Profit";
+        System.out.println(output);
+    }
+    @Test
+    public void test1() {
+        doBuyAndSellStock(3, new int[]{2, 3, 1});
+        doBuyAndSellStock(2, new int[]{2, 3});
+        doBuyAndSellStock(1, new int[]{2});
+        doBuyAndSellStock(2, new int[]{2, 1});
     }
 }
