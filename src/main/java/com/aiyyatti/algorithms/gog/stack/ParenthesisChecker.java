@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.gog.problems;
+package com.aiyyatti.algorithms.gog.stack;
 
 import junit.framework.TestCase;
 import org.junit.Test;

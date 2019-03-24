@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tests.aws;
+package com.aiyyatti.algorithms.gog.aws;
 
 import org.junit.Test;
 import org.slf4j.Logger;

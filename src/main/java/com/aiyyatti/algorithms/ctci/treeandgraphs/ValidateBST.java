@@ -1,9 +1,11 @@
 package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
+import junit.framework.TestCase;
+import org.junit.Test;
+
 /**
  * Validate BST: Implement a function to check if a binary tree is a binary search tree.
  */
-@Tree
 public class ValidateBST {
     public boolean isBST(Node root) {
         if (root == null ||

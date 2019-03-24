@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.gog.mustdocodingquestions.arrays;
+package com.aiyyatti.algorithms.gog.lexicographicpattern;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.gog.mustdocodingquestions.arrays;
+package com.aiyyatti.algorithms.gog.arrays;
 
 /**
  * https://practice.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence/0

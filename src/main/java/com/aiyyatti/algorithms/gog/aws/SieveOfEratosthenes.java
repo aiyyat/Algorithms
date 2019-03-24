@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tests.aws;
+package com.aiyyatti.algorithms.gog.aws;
 
 import junit.framework.TestCase;
 import org.junit.Test;

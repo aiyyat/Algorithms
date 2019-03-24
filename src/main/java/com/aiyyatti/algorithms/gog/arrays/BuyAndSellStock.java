@@ -1,6 +1,5 @@
-package com.aiyyatti.algorithms.gog.mustdocodingquestions.arrays;
+package com.aiyyatti.algorithms.gog.arrays;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;

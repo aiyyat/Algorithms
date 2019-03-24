@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.tests.aws;
+package com.aiyyatti.algorithms.gog.aws;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Find all duplicates in an array in linear time (v1)
