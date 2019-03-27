@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.leetcode.problems;
+package com.aiyyatti.algorithms.leetcode;
 
 import org.junit.Test;
 

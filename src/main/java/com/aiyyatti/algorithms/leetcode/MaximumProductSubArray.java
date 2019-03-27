@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.leetcode.problems;
+package com.aiyyatti.algorithms.leetcode;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * https://leetcode.com/problems/maximum-product-subarray/
  */
-public class MaximumProductSubarray {
+public class MaximumProductSubArray {
     @Test
     public void simpleTest() {
         TestCase.assertEquals(12, maxProduct(new int[]{-2, 1, -2, -6}));

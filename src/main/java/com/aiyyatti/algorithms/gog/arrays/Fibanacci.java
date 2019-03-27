@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.gog.arrays.bigo;
+package com.aiyyatti.algorithms.gog.arrays;
 
 import junit.framework.TestCase;
 import org.junit.Test;
