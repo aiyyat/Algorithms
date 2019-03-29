@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'idea'
 }
 
 group 'com.aiyyatti.algorithms'
@@ -16,15 +17,4 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.9'
     compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.9'
-    compile 'com.google.auto.service:auto-service:1.0-rc4'
-}
-task generateSources(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
-    source = sourceSets.main.java
-    classpath = configurations.compile
-    options.compilerArgs = ['-proc:only',
-                            '-processor',
-                            'com.aiyyatti.algorithms.annotation.processor.Readme']
-    options.warnings = false
-    destinationDir = file('src/main/generated')
-    outputs.dir destinationDir
 }

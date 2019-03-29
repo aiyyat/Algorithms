@@ -1,7 +1,5 @@
 package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
-import com.aiyyatti.algorithms.annotation.Tree;
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -13,7 +11,6 @@ import java.util.LinkedList;
  * <p>
  * Time Complexity: O(n)
  */
-@Tree
 public class BSTSequence {
 
     public LinkedList<LinkedList<Integer>> doBSTSequence(Node root) {
