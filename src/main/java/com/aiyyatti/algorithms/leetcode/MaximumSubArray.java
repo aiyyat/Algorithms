@@ -1,10 +1,10 @@
-package com.aiyyatti.algorithms.leetcode;
+package com.aiyyatti.algorithms.leetcode.problems;
 
 import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
- * https://leetcode.com/problems/maximum-subarray/submissions/
+ * https://leetcode.com/problems/maximum-subarray/
  */
 public class MaximumSubArray {
     @Test
