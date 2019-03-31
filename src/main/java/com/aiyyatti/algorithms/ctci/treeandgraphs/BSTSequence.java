@@ -2,7 +2,6 @@ package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -10,77 +9,88 @@ import java.util.LinkedList;
  * and inserting each element. Given a binary search tree with distinct elements, print all possible
  * arrays that could have led to this tree.
  * <p>
- * Time Complexity: O(n^3)
+ * Time Complexity: O(n)
  */
 public class BSTSequence {
-    public ArrayList<LinkedList<Integer>> doBSTSequence(Node root) {
-        if (root == null) {
-            ArrayList<LinkedList<Integer>> result = new ArrayList<>();
-            result.add(new LinkedList<>());
-            return result;
-        }
-        ArrayList<LinkedList<Integer>> left = doBSTSequence(root.left);
-        ArrayList<LinkedList<Integer>> right = doBSTSequence(root.right);
-        ArrayList<LinkedList<Integer>> output = new ArrayList<>();
-        LinkedList<Integer> result = new LinkedList<>();
-        LinkedList<Integer> rootData = new LinkedList<>();
-        rootData.add(root.data);
-        for (int i = 0; i < left.size(); i++)
-            for (int j = 0; j < right.size(); j++)
-                weave(left.get(i), right.get(j), output, rootData);
+
+    public LinkedList<LinkedList<Integer>> doBSTSequence(Node root) {
+        if (root == null) return new LinkedList<>();
+        LinkedList<LinkedList<Integer>> left = doBSTSequence(root.left);
+        LinkedList<LinkedList<Integer>> right = doBSTSequence(root.right);
+        LinkedList<LinkedList<Integer>> output = new LinkedList<>();
+        LinkedList<LinkedList<Integer>> prefix = new LinkedList<>();
+        LinkedList<Integer> rootList = new LinkedList<>();
+        rootList.add(root.data);
+        prefix.add(rootList);
+        weave(left, right, output, prefix);
         return output;
     }
 
-    public void weave(LinkedList<Integer> left, LinkedList<Integer> right, ArrayList<LinkedList<Integer>> output, LinkedList<Integer> prefix) {
-        if (left.size() == 0 || right.size() == 0) {
-            LinkedList<Integer> result = new LinkedList<>();
-            result.addAll(prefix);
-            result.addAll(right);
-            result.addAll(left);
-            output.add(result);
+    private void weave(LinkedList<LinkedList<Integer>> leftList, LinkedList<LinkedList<Integer>> rightList, LinkedList<LinkedList<Integer>> outputList, LinkedList<LinkedList<Integer>> prefixList) {
+        if (leftList.isEmpty() || rightList.isEmpty()) {
+            LinkedList<Integer> yetAnother = new LinkedList<>();
+            prefixList.forEach(e -> yetAnother.addAll(e));
+            leftList.forEach(e -> yetAnother.addAll(e));
+            rightList.forEach(e -> yetAnother.addAll(e));
+            outputList.add(yetAnother);
             return;
-        } else {
-            prefix.add(left.removeFirst());
-            weave(left, right, output, prefix);
-            left.add(prefix.removeLast());
-
-            prefix.add(right.removeFirst());
-            weave(left, right, output, prefix);
-            right.add(prefix.removeLast());
         }
-    }
+        LinkedList<Integer> left = leftList.removeFirst();
+        prefixList.add(left);
+        weave(rightList, leftList, outputList, prefixList);
+        prefixList.removeLast();
 
+        LinkedList<Integer> right = rightList.removeFirst();
+        prefixList.add(right);
+        weave(leftList, rightList, outputList, prefixList);
+        prefixList.removeLast();
+    }
 
     ////////////////
     // TEST CASES //
     ////////////////
+    @Test
+    public void simpleBSTTest() {
+        Node n0 = new Node(0);
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Node n5 = new Node(5);
+        Node n6 = new Node(6);
+        Node n7 = new Node(7);
+        Node n8 = new Node(8);
+        Node n9 = new Node(9);
+        Node n10 = new Node(10);
+        n5.left(n3);
+        n5.right(n7);
+        n7.left(n6);
+        n7.right(n9);
+        n9.left(n8);
+        n9.right(n10);
+        n3.left(n1);
+        n3.right(n4);
+        n1.left(n0);
+        n1.right(n2);
+        System.out.println(doBSTSequence(n5));
+    }
 
     @Test
-    public void simpleBSTTest0() {
+    public void simplestTest() {
         Node n1 = new Node(1);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
         Node n7 = new Node(7);
-        Node n9 = new Node(9);
+        Node n8 = new Node(8);
         n5.left(n3);
         n5.right(n7);
         n7.left(n6);
-        n7.right(n9);
+        n7.right(n8);
         n3.left(n1);
         n3.right(n4);
-        TestCase.assertEquals("[[5, 3, 1, 4, 7, 6, 9], [5, 3, 1, 7, 4, 6, 9], [5, 3, 1, 7, 6, 4, 9], [5, 3, 1, 7, 6, 9, 4], [5, 3, 9, 4, 1, 6, 7], [5, 3, 9, 4, 6, 1, 7], [5, 3, 9, 4, 6, 7, 1], [5, 3, 9, 7, 1, 4, 6], [5, 3, 9, 7, 1, 6, 4], [5, 3, 9, 7, 6, 4, 1], [5, 6, 4, 1, 3, 7, 9], [5, 6, 4, 1, 7, 3, 9], [5, 6, 4, 1, 7, 9, 3], [5, 6, 4, 9, 3, 1, 7], [5, 6, 4, 9, 3, 7, 1], [5, 6, 4, 9, 7, 1, 3], [5, 6, 7, 1, 3, 4, 9], [5, 6, 7, 1, 3, 9, 4], [5, 6, 7, 1, 9, 4, 3], [5, 6, 7, 9, 4, 3, 1], [5, 4, 3, 1, 7, 9, 6], [5, 4, 3, 7, 1, 9, 6], [5, 4, 3, 7, 9, 1, 6], [5, 4, 3, 7, 9, 6, 1], [5, 4, 6, 1, 3, 9, 7], [5, 4, 6, 1, 9, 3, 7], [5, 4, 6, 1, 9, 7, 3], [5, 4, 6, 7, 3, 1, 9], [5, 4, 6, 7, 3, 9, 1], [5, 4, 6, 7, 9, 1, 3], [5, 9, 1, 3, 4, 7, 6], [5, 9, 1, 3, 7, 4, 6], [5, 9, 1, 3, 7, 6, 4], [5, 9, 1, 6, 4, 3, 7], [5, 9, 1, 6, 4, 7, 3], [5, 9, 1, 6, 7, 3, 4], [5, 9, 7, 3, 4, 1, 6], [5, 9, 7, 3, 4, 6, 1], [5, 9, 7, 3, 6, 1, 4], [5, 9, 7, 6, 1, 4, 3], [5, 3, 4, 1, 9, 7, 6], [5, 3, 4, 9, 1, 7, 6], [5, 3, 4, 9, 7, 1, 6], [5, 3, 4, 9, 7, 6, 1], [5, 3, 6, 1, 4, 7, 9], [5, 3, 6, 1, 7, 4, 9], [5, 3, 6, 1, 7, 9, 4], [5, 3, 6, 9, 4, 1, 7], [5, 3, 6, 9, 4, 7, 1], [5, 3, 6, 9, 7, 1, 4], [5, 7, 1, 4, 3, 9, 6], [5, 7, 1, 4, 9, 3, 6], [5, 7, 1, 4, 9, 6, 3], [5, 7, 1, 6, 3, 4, 9], [5, 7, 1, 6, 3, 9, 4], [5, 7, 1, 6, 9, 4, 3], [5, 7, 9, 4, 3, 1, 6], [5, 7, 9, 4, 3, 6, 1], [5, 7, 9, 4, 6, 1, 3], [5, 7, 9, 6, 1, 3, 4], [5, 1, 3, 4, 6, 7, 9], [5, 1, 3, 6, 4, 7, 9], [5, 1, 3, 6, 7, 4, 9], [5, 1, 3, 6, 7, 9, 4], [5, 1, 9, 4, 3, 7, 6], [5, 1, 9, 4, 7, 3, 6], [5, 1, 9, 4, 7, 6, 3], [5, 1, 9, 6, 3, 4, 7], [5, 1, 9, 6, 3, 7, 4], [5, 1, 9, 6, 7, 4, 3], [5, 7, 4, 3, 1, 6, 9], [5, 7, 4, 3, 6, 1, 9], [5, 7, 4, 3, 6, 9, 1], [5, 7, 4, 9, 1, 3, 6], [5, 7, 4, 9, 1, 6, 3], [5, 7, 4, 9, 6, 3, 1], [5, 7, 6, 3, 1, 4, 9], [5, 7, 6, 3, 1, 9, 4], [5, 7, 6, 3, 9, 4, 1], [5, 7, 6, 9, 4, 1, 3]]\n", doBSTSequence(n5).toString());
-    }
-
-    @Test
-    public void simpleBSTTest1() {
-        Node n3 = new Node(3);
-        Node n5 = new Node(5);
-        Node n7 = new Node(7);
-        n5.left(n3);
-        n5.right(n7);
-        TestCase.assertEquals("[[5, 3, 7], [5, 7, 3]]", doBSTSequence(n5).toString());
+        System.out.println(doBSTSequence(n5));
     }
 
     ////////////////////
