@@ -24,6 +24,12 @@ public class Prime {
         TestCase.assertTrue(isPrime(2699));
     }
 
+    /**
+     * Time Complexity: O(sqrt(n))
+     *
+     * @param n
+     * @return
+     */
     public boolean isPrime(int n) {
         if (n % 2 == 0) return false;
         for (int i = 3; i * i < n; i++) if (n % i == 0) return false;
