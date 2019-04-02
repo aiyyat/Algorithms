@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.ctci;
+package com.aiyyatti.algorithms.ctci.moderate;
 
 import junit.framework.TestCase;
 import org.junit.BeforeClass;

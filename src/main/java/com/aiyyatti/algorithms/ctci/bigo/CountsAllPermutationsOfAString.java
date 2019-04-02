@@ -16,6 +16,13 @@ public class CountsAllPermutationsOfAString {
         TestCase.assertEquals(24, doCountsAllPermutationsOfAString("abcd", 0));
     }
 
+    /**
+     * Time Complexity: O(n)
+     *
+     * @param str
+     * @param index
+     * @return
+     */
     public int doCountsAllPermutationsOfAString(String str, int index) {
         if (index == str.length()) {
             System.out.println(str);
