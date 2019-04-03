@@ -42,22 +42,26 @@ public class Java1DArray {
             if (leaped > N - 1 || (leaped == N - 1 && game[leaped] == 0)) return true;
             else if (canWin(leap, game, index + 1)) return true;
             else if (canWin(leap, game, index + leap)) return true;
+            else if (index > 0) {
+                game[index] = 1;
+                if (canWin(leap, game, index - 1)) return true;
+            }
         }
         return false;
     }
 
-//    public static void main(String[] args) {
-//        Scanner scan = new Scanner(System.in);
-//        int q = scan.nextInt();
-//        while (q-- > 0) {
-//            int n = scan.nextInt();
-//            int leap = scan.nextInt();
-//            int[] game = new int[n];
-//            for (int i = 0; i < n; i++) {
-//                game[i] = scan.nextInt();
-//            }
-//            System.out.println((canWin(leap, game)) ? "YES" : "NO");
-//        }
-//        scan.close();
-//    }
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int q = scan.nextInt();
+        while (q-- > 0) {
+            int n = scan.nextInt();
+            int leap = scan.nextInt();
+            int[] game = new int[n];
+            for (int i = 0; i < n; i++) {
+                game[i] = scan.nextInt();
+            }
+            System.out.println((canWin(leap, game)) ? "YES" : "NO");
+        }
+        scan.close();
+    }
 }
