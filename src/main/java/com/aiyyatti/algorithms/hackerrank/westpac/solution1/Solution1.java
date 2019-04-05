@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 
 public class Solution1 {
     public static void main(String args[]) throws Exception {
-        Scanner scanner = new Scanner(new FileInputStream(new File("C:\\Softwares\\code\\Algorithms\\src\\main\\java\\com\\aiyyatti\\algorithms\\hackerrank\\westpac\\input003.txt")));
+        String str = "111 AAPL BUY 10000\n" +
+                "222 AAPL BUY 20000\n" +
+                "333 AAPL SELL 100000";
+        Scanner scanner = new Scanner(new ByteArrayInputStream(str.getBytes()));
         ArrayList<Order> orders = new ArrayList<>();
         String output = "";
         while (scanner.hasNext()) {
@@ -42,7 +45,6 @@ public class Solution1 {
             output += matches.size() + " matches: " + matches.stream().map(n -> n.getOrderId().toString()).collect(Collectors.joining(",")) + "\n";
         }
         System.out.println(output);
-        System.out.println(orders);
     }
 
     static class Order {
