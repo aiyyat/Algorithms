@@ -1,55 +1,77 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
 import org.junit.Test;
-
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class Respace {
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
     public void simpleTest() {
-        String input = "youareawesome";
-        HashSet<String> dictionary = new HashSet<>();
-        dictionary.add("you");
-        dictionary.add("are");
-        dictionary.add("awesome");
-        dictionary.add("some");
-        dictionary.add("me");
-        System.out.println(doRespace(input, dictionary));
+        HashSet<String> dict = new HashSet<>();
+        dict.add("we");
+        dict.add("a");
+        dict.add("number");
+        dict.add("guy");
+        dict.add("named");
+        dict.add("had");
+        dict.add("awesome");
+        dict.add("at");
+        dict.add("cat");
+        dict.add("pet");
+        dict.add("dilemma");
+        String str = "weeeeaguynamedawesomehadacatnameddilemmahasapetnamedguy";
+        System.out.println(doRespace(str, dict, 0, new Match[str.length()]));
     }
 
-    public String doRespace(String input, HashSet<String> dictionary) {
-        return doRespace(input, dictionary, 0).bestPartition;
+    class Match {
+        int bestMisMatchCount = Integer.MAX_VALUE;
+        String bestMatchString = "";
+
+        public Match() {
+        }
+
+        public Match(int bestMisMatchCount, String bestMatchString) {
+            this.bestMisMatchCount = bestMisMatchCount;
+            this.bestMatchString = bestMatchString;
+        }
+
+        public boolean isBetterThan(Match match) {
+            return this.bestMisMatchCount < match.bestMisMatchCount;
+        }
+
+        public Match combine(Match match) {
+            return new Match(this.bestMisMatchCount + match.bestMisMatchCount, this.bestMatchString + " " + match.bestMatchString);
+        }
+
+        @Override
+        public String toString() {
+            return bestMatchString;
+        }
     }
 
-    public ParseResult doRespace(String input, HashSet<String> dictionary, int index) {
-        if (index >= input.length()) return new ParseResult(0, "");
-        String partition = "";
-        Integer bestInvalid = Integer.MAX_VALUE;
-        String bestPartition = "";
-        for (; index < input.length(); index++) {
-            partition += input.charAt(index);
-            System.out.println(partition);
-            int invalidIndex = dictionary.contains(partition) ? 0 : partition.length();
-            if (invalidIndex < bestInvalid) {
-                ParseResult parseResult = doRespace(input, dictionary, index + 1);
-                if (invalidIndex + parseResult.bestInvalid < bestInvalid) {
-                    bestInvalid = invalidIndex + parseResult.bestInvalid;
-                    bestPartition = partition + " " + parseResult.bestPartition;
-                    if (bestInvalid == 0) break;
-                }
+    public Match doRespace(String str, HashSet<String> dict, int index, Match[] memo) {
+        int N = str.length();
+        if (index == N) return new Match(0, "");
+        if (memo[index] != null) return memo[index];
+        String prefix = "";
+        Match bestMatch = new Match(Integer.MAX_VALUE, "");
+        for (int i = index; i < N; i++) {
+            char charAt = str.charAt(i);
+            prefix += charAt;
+            int invalid = prefix.length();
+            String newString = charAt + " ";
+            if (dict.contains(prefix)) {
+                invalid = 0;
+                newString = prefix + " ";
+            }
+            Match rest = doRespace(str, dict, i + 1, memo);
+            if (bestMatch.bestMisMatchCount > rest.bestMisMatchCount + invalid) {
+                bestMatch = new Match(rest.bestMisMatchCount + invalid, newString + rest.bestMatchString);
+                memo[index] = bestMatch;
             }
         }
-        return new ParseResult(bestInvalid, bestPartition);
-    }
-
-    class ParseResult {
-        int bestInvalid = Integer.MAX_VALUE;
-        String bestPartition = "";
-
-        public ParseResult(int bestInvalid, String bestPartition) {
-            this.bestInvalid = bestInvalid;
-            this.bestPartition = bestPartition;
-        }
+        return bestMatch;
     }
 }
