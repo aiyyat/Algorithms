@@ -37,14 +37,6 @@ public class Respace {
             this.bestMatchString = bestMatchString;
         }
 
-        public boolean isBetterThan(Match match) {
-            return this.bestMisMatchCount < match.bestMisMatchCount;
-        }
-
-        public Match combine(Match match) {
-            return new Match(this.bestMisMatchCount + match.bestMisMatchCount, this.bestMatchString + " " + match.bestMatchString);
-        }
-
         @Override
         public String toString() {
             return bestMatchString;
@@ -75,3 +67,4 @@ public class Respace {
         return bestMatch;
     }
 }
+
