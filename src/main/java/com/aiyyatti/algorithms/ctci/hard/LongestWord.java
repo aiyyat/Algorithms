@@ -10,7 +10,7 @@ import java.util.HashSet;
 public class LongestWord {
     @Test
     public void testSimple() {
-        System.out.printf("Matched: %s", doLongestWord(new String[]{"Sun", "Flower", "SunFlower"}));
+        System.out.printf("Matched: %s",doLongestWord(new String[]{"Sun", "Flower", "SunFlower"}));
     }
 
     public String doLongestWord(String[] strings) {
