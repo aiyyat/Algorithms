@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.ctci.arraysandstring;
+package com.aiyyatti.algorithms.ctci.arraysandstrings;
 
 import junit.framework.TestCase;
 import org.junit.Test;

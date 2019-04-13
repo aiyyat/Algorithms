@@ -9,58 +9,83 @@ import java.util.Queue;
 import static junit.framework.TestCase.assertTrue;
 
 /**
- * TODO: learn the Queue and Stack Implmentations in java.
+ * TODO:
+ *      learn the Queue and Stack Implmentations in java.
+ *      CTCI had a cleaner implementation -
+ *      To know: what will the parameters to method be while
+ *      doing reverse recursion?? - the original values.
+ *      <p>
+ *      I implemented it wrong - ended up adding to Queue until middle element and
+ *      then returning and checking with polled value form Queue -
+ *      in the end checking the element with itself.
+ *      so if you are using recursion DO not use Queue.
  */
 public class Palindrome {
+    //////////////
+    // TESTCASE //
+    //////////////
     @Test
-    public void ctciTest() {
+    public void ctciwithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(1).add(2).add(1).add(0).build();
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void oddWithOneNodeTest() {
+    public void oddWithOneNodewithoutDSTest() {
         Node root = new NodeBuilder().add(0).build();
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void evenPalindromeTest() {
+    public void evenPalindromewithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(0).build();
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void evenNotPalindromeTest() {
+    public void evenNotPalindromewithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(1).build();
-        assertTrue(isPalindrome(root));
+        TestCase.assertFalse(isPalindrome(root));
     }
 
     @Test
-    public void oddMoreThanOneNodePalindromTest() {
+    public void oddMoreThanOneNodePalindromwithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(1).add(0).build();
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void oddMoreThanOneNodeNotPalindromTest() {
+    public void oddMoreThanOneNodeNotPalindromwithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(1).add(2).build();
         assertTrue(isPalindrome(root));
     }
 
-    public boolean isPalindrome(Node root) {
-        return isPalindrome(root, root, new LinkedList<Node>());
+    ////////////////
+    // APPROACH I //
+    ////////////////
+    class Result {
+        boolean result;
+        Node node;
+
+        public Result(boolean result, Node node) {
+            this.result = result;
+            this.node = node;
+        }
     }
 
-    public boolean isPalindrome(Node root, Node runner, Queue<Node> queue) {
-        if (root == null) return true;
-        if (runner != null) {
-            queue.add(runner);
-            runner = runner.next == null ? null : runner.next.next;
-        }
-        boolean result = isPalindrome(root.next, runner, queue);
-        if (queue.isEmpty()) return result;
-        else return result || queue.poll().data == root.data;
+    //TODO: REDO
+    //corner - root is null
+    public boolean isPalindrome(Node root) {
+        int N = 0;
+        for (Node node = root; node != null; node = node.next) N++;
+        return isPalindrome(root, N - 2).result;
+    }
+
+    public Result isPalindrome(Node root, int N) {
+        if (N < 0) return new Result(true, root.next);
+        else if (N == 0) return new Result(root.data == root.next.data, root.next);
+        Result result = isPalindrome(root.next, N -= 2);
+        return new Result(result.result || result.node.data == root.data, result.node.next);
     }
 
     class Node {

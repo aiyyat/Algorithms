@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.ctci;
+package com.aiyyatti.algorithms.ctci.arraysandstrings;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -7,14 +7,30 @@ Approach:
 * Corner cases: Two Types
     * Question Corner Cases. Define them soon after understanding question.
     * Implementation Corner Case. Define them while/after writing the code.
+* "DO NOT" start CODE until the above steps are clear
 * Write pseudo code/implementation.
 * Reherse the scenarios/corner cases on implementation.
 
 # Things to remember:
+~~~
+Short Circuit
+~~~
 * The && and || operators "short-circuit", meaning they don't evaluate the right hand side if it isn't necessary. The & and | operators, when used as logical operators, always evaluate both sides.
-* https://github.com/aiyyatti/JavaCollections
+~~~
+Must Redos.
+~~~
+* SearchInRotatedArray: see if you can fit in right>left
+* LinkedList Palindrome: 
+    * check for middle element is odd or even. 
+    * Do not use Queue with recursion. only use it with iteration else you will end up with checking a node against itself.
+* Matrix Rotation: layer Rotation. 
 
-# Prepare From:
+~~~
+Collections
+~~~
+* https://github.com/aiyyatti/JavaCollections
+  
+# Prepare:
 https://www.hackerrank.com/
 https://leetcode.com/
 https://www.techiedelight.com/

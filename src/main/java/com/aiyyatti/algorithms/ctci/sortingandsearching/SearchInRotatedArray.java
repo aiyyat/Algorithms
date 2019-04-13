@@ -5,8 +5,7 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * TODO: Tricky implementation, corner case check
- * fails case: [3,1] 1
+ * TODO: Tricky implementation, corner case check fails for case: [3,1] 1
  *
  */
 public class SearchInRotatedArray {
