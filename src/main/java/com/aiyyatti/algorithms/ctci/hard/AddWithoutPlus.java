@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.ctci.linkedlist;
+package com.aiyyatti.algorithms.ctci.hard;
 
 import org.junit.Test;
 
