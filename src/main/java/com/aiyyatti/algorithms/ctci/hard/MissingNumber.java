@@ -6,7 +6,7 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * TODO
+ * TODO Must Practise
  * Working but with a lot of code. Understand from CTCI how that works.
  * This approach:
  * 1) calculate the number of complete blocks from 0 for both numbers
