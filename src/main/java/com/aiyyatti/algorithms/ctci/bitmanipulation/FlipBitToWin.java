@@ -3,6 +3,7 @@ package com.aiyyatti.algorithms.ctci.bitmanipulation;
 import org.junit.Test;
 
 /**
+ * TODO: reherse the logic.
  * 1	0	1	1	1	0	1	1	1	0	1	1	1	0	1	1	1	1	0	1	1	1	1	0	0	1
  * CTN	1	2	3	4	5	4	5	6	7	4	5	6	7	4	5	6	7	8	5	6	7	8	9	5	1	2
  * CSZ	1	0	1	2	3	0	1	2	3	0	1	2	3	0	1	2	3	4	0	1	2	3	4	0	0	1
