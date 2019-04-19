@@ -59,7 +59,9 @@ public class IsUnique {
         str = "aa";
         assertFalse(checkIsUniqueWithAdditionalDS(str));
     }
-
+    //////////////
+    // SOLUTION //
+    //////////////
     /**
      * TODO: this can be used with 256 characters ascii input also.
      *

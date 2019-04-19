@@ -1,3 +1,5 @@
+#Algorithms
+### Note: The testcases are written along with the solution for the sake of Proximity.
 # DS Tips
 ~~~
 Approach:

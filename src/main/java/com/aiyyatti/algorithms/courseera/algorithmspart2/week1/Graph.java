@@ -67,20 +67,20 @@ public class Graph {
         vs[v1].add(v2);
     }
 
-    public static class GraphTester {
+    public class GraphTester {
         @Test
         public void simpleTest() {
-            String str = "8" +
-                    "9" +
-                    "0 1" +
-                    "1 2" +
-                    "1 3" +
-                    "2 4" +
-                    "4 6" +
-                    "3 7" +
-                    "7 8" +
-                    "6 8" +
-                    "4 5" +
+            String str = "9\n" +
+                    "10\n" +
+                    "0 1\n" +
+                    "1 2\n" +
+                    "1 3\n" +
+                    "2 4\n" +
+                    "4 6\n" +
+                    "3 7\n" +
+                    "7 8\n" +
+                    "6 8\n" +
+                    "4 5\n" +
                     "5 6";
             Graph graph = new Graph(new ByteArrayInputStream(str.getBytes()));
             ArrayList<Integer> neighbours = graph.neighboursOf(6);
