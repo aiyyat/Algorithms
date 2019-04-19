@@ -49,7 +49,7 @@ public class Graph {
     public Graph(int V, int[][] Es) {
         this.V = V;
         vs = new ArrayList[V];
-        this.E = E;
+        this.E = Es.length;
         for (int[] E : Es) addEdge(E[0], E[1]);
     }
 
@@ -65,30 +65,6 @@ public class Graph {
     private void addDirectionalEdge(int v1, int v2) {
         if (vs[v1] == null) vs[v1] = new ArrayList<>();
         vs[v1].add(v2);
-    }
-
-    public class GraphTester {
-        @Test
-        public void simpleTest() {
-            String str = "9\n" +
-                    "10\n" +
-                    "0 1\n" +
-                    "1 2\n" +
-                    "1 3\n" +
-                    "2 4\n" +
-                    "4 6\n" +
-                    "3 7\n" +
-                    "7 8\n" +
-                    "6 8\n" +
-                    "4 5\n" +
-                    "5 6";
-            Graph graph = new Graph(new ByteArrayInputStream(str.getBytes()));
-            ArrayList<Integer> neighbours = graph.neighboursOf(6);
-            TestCase.assertEquals(3, neighbours.size());
-            TestCase.assertTrue(neighbours.contains(4));
-            TestCase.assertTrue(neighbours.contains(8));
-            TestCase.assertTrue(neighbours.contains(5));
-        }
     }
 }
 
