@@ -9,6 +9,9 @@ import java.util.Comparator;
  * https://www.geeksforgeeks.org/sort-elements-by-frequency/
  */
 public class SortElementsByFrequencySet1 {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         int[] input = new int[]{2, 5, 2, 8, 5, 6, 8, 8};

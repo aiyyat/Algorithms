@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://leetcode.com/problems/maximum-product-subarray/
  */
 public class MaximumProductSubArray {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertEquals(12, maxProduct(new int[]{-2, 1, -2, -6}));

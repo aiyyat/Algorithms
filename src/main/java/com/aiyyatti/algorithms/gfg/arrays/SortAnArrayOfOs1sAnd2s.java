@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
  * https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0
  */
 public class SortAnArrayOfOs1sAnd2s {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple1() {
         doSort(new int[]{0, 1, 2, 2, 1, 1, 1, 1, 0, 0, 0, 2, 1});

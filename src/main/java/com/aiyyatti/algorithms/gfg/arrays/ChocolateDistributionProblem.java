@@ -16,6 +16,9 @@ import java.util.Scanner;
  * of least difference. for this sort the array first.
  */
 public class ChocolateDistributionProblem {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         String input = "2\n" +

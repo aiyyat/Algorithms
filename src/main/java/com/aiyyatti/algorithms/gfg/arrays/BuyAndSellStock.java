@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class BuyAndSellStock {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         String input = "2\n" +

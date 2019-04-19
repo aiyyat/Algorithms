@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.util.Scanner;
 
 public class Java1DArray {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertTrue(canWin(3, new int[]{0, 0, 0, 0, 0}));

@@ -5,6 +5,9 @@ import org.junit.Test;
 import java.util.Stack;
 
 public class SortStack {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void ctciTest() {
         Stack<Integer> stack = new Stack<>();

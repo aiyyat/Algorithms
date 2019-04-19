@@ -31,7 +31,9 @@ public class CheckSubtree {
             return false;
         } else return checkSubTree(t1.left, t2.left) && checkSubTree(t1.right, t2.right);
     }
-
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimpleSameTree() {
         Node n0 = new Node(0);

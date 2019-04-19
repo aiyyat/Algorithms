@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.hackerrank;
+package com.aiyyatti.algorithms.hackerrank.java;
 
 import org.junit.Test;
 
@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.util.*;
 
 public class JavaPriorityQueue {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void test() {
         String str = "12\n" +

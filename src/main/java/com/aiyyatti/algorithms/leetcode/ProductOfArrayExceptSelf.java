@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://leetcode.com/problems/product-of-array-except-self/
  */
 public class ProductOfArrayExceptSelf {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         Assert.assertArrayEquals(new int[]{24, 12, 8, 6}, productExceptSelf(new int[]{1, 2, 3, 4}));

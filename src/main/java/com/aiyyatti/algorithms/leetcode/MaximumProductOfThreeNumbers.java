@@ -9,6 +9,9 @@ import java.util.Arrays;
  * https://leetcode.com/problems/maximum-product-of-three-numbers/
  */
 public class MaximumProductOfThreeNumbers {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertEquals(1498, doMaximumProductOfThreeNumbers(new int[]{1, 2, 3, 4, 5, 6, 7, -2, -7 - 100}, 3));

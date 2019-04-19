@@ -9,6 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class URLify {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         String mr_john_smith = "Mr John Smith";

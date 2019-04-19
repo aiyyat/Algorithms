@@ -11,6 +11,9 @@ import java.util.Stack;
  * https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/
  */
 public class ParenthesisChecker {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple1() {
         TestCase.assertFalse(checkParanthesis("(()"));

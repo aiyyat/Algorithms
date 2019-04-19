@@ -10,6 +10,9 @@ import java.util.Scanner;
  * https://practice.geeksforgeeks.org/problems/equilibrium-point/0
  */
 public class EquilibriumPoint {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         String str = "2\n" +

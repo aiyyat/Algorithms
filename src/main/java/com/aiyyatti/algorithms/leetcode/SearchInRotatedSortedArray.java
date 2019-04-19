@@ -9,6 +9,9 @@ import org.junit.Test;
  *  rather than defining left or right around conditions.
  */
 public class SearchInRotatedSortedArray {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void case1Test() {
         int[] input = {1, 2, 3, 4, 5, 6, 7};

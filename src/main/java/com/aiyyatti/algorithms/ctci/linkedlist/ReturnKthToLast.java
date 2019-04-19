@@ -7,6 +7,9 @@ import org.junit.Test;
  * TODO: tricky - just understand - check for current.next=null so that you end up in the node you want not the next one.
  */
 public class ReturnKthToLast {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void test2Simple() {
         Node n1 = new Node(1);

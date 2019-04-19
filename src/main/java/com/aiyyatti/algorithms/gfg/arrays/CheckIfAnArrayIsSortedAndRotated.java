@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://www.geeksforgeeks.org/check-if-an-array-is-sorted-and-rotated/
  */
 public class CheckIfAnArrayIsSortedAndRotated {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         TestCase.assertFalse(checkSortedAndRotated(new int[]{3, 4, 5, 2, 1}));

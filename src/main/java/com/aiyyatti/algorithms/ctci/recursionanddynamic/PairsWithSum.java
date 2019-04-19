@@ -1,10 +1,13 @@
-package com.aiyyatti.algorithms.ctci;
+package com.aiyyatti.algorithms.ctci.recursionanddynamic;
 
 import org.junit.Test;
 
 import java.util.Arrays;
 
 public class PairsWithSum {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest1() {
         System.out.println(doPairsWithSum(new int[]{2, 14, 16, 10, 6, 4, 8, 0, 12}, 16));

@@ -10,9 +10,13 @@ import org.slf4j.LoggerFactory;
  * pennies (1 cent), write code to calculate the number of ways of representing n cents.
  */
 public class Coins {
+
     Logger logger = LoggerFactory.getLogger(Coins.class);
     private static final int[] COINS = new int[]{25, 10, 5, 1};
 
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest1() {
         TestCase.assertEquals(4, numberOfWaysOfRepresending(10));

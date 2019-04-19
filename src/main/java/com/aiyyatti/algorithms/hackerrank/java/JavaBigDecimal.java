@@ -11,6 +11,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class JavaBigDecimal {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         String input = "9\n" +

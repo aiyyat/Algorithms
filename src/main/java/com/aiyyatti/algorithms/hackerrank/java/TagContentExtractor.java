@@ -6,6 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TagContentExtractor {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         String input = "<h1><h1>Sanjay has no watch</h1></h1><par>So wait for a while</par>";

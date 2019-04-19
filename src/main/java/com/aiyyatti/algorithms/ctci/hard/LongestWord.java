@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class LongestWord {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         System.out.printf("Matched: %s",doLongestWord(new String[]{"Sun", "Flower", "SunFlower"}));

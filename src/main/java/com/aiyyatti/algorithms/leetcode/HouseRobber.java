@@ -9,6 +9,9 @@ import java.util.Arrays;
  * https://leetcode.com/problems/house-robber/
  */
 public class HouseRobber {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertEquals(6, stealPattern(new int[]{2, 1, 1, 2, 1, 2, 1}));

@@ -1,10 +1,14 @@
-package com.aiyyatti.algorithms.gfg;
+package com.aiyyatti.algorithms.ctci.moderate;
 
 import org.junit.Test;
 
 import java.util.Arrays;
 
 public class SumSwap {
+    ////////////////
+    // TEST CASES //
+    ////////////////
+
     @Test
     public void simpleTest() {
         int[] a1 = new int[]{4, 1, 2, 1, 1, 2}; //11

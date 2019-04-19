@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 public class SecondBiggestNumber {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         TestCase.assertEquals(1, secondBiggestNumber(new int[]{5, 4, 0, 6, 7, 9, 1, 7}));

@@ -10,6 +10,9 @@ import org.junit.Test;
  * counts for both 1908 and 1909.
  */
 public class LivingPeople {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         int[] birth = {1912, 1920, 1910, 1901, 1910, 1923, 1913, 1990, 1983, 1975};

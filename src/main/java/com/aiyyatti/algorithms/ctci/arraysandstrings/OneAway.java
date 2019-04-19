@@ -6,6 +6,9 @@ import static junit.framework.TestCase.assertFalse;
 import org.junit.Test;
 
 public class OneAway {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simple1Test() {
         assertTrue(checkOneAway("pale", "ple"));

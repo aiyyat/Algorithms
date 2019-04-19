@@ -22,6 +22,9 @@ import java.util.List;
  * your program should return [[11, -4], [2, 5]] because 11 + -4 = 7 and 2 + 5 = 7.
  */
 public class TwoSumProblem {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     private Logger logger = LoggerFactory.getLogger(TwoSumProblem.class);
     private final Integer ZERO = 0;
 

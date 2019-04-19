@@ -10,6 +10,9 @@ import org.junit.Test;
  * https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
  */
 public class LargestSumContigousSubArray {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         TestCase.assertEquals(7, doLargestSumContigousArray(new int[]{-2, -3, 4, -1, -2, 1, 5, -3}));

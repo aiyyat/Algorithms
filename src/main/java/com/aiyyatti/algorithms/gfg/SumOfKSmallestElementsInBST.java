@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://www.geeksforgeeks.org/sum-k-smallest-elements-bst/
  */
 public class SumOfKSmallestElementsInBST {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         Node n8 = new Node(8);

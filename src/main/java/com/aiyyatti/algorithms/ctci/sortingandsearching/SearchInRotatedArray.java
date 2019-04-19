@@ -9,6 +9,9 @@ import static junit.framework.TestCase.assertEquals;
  *
  */
 public class SearchInRotatedArray {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void test1Simple() {
         int[] sortRotatad = new int[]{4, 5, 6, 7, 0, 1, 2};

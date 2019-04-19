@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class CountsAllPermutationsOfAString {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertEquals(6, doCountsAllPermutationsOfAString("abc", 0));

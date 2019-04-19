@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
  * https://practice.geeksforgeeks.org/problems/reverse-array-in-groups/0
  */
 public class ReverseArrayInGroups {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         reverseArrayInGroups(5, new int[]{1, 2, 3, 4, 5}, 3);

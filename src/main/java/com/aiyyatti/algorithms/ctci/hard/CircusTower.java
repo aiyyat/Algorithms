@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class CircusTower {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest1() {
         int[][] persons = new int[][]{new int[]{65, 100}, new int[]{70, 150}, new int[]{56, 90}, new int[]{75, 190}, new int[]{60, 95}, new int[]{68, 22}};

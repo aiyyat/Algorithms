@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://practice.geeksforgeeks.org/problems/kth-smallest-element/0
  */
 public class KthSmallestElement {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         int[] a = {9, 7, 8, 2, 5, 1, 3, 6, 4, 0};

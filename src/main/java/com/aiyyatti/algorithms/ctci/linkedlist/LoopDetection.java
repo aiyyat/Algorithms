@@ -9,6 +9,9 @@ import static junit.framework.TestCase.*;
  * TODO: use a do while instead of a while to skip the first node check.
  */
 public class LoopDetection {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void ctciTest() {
         Node c = new Node('C');

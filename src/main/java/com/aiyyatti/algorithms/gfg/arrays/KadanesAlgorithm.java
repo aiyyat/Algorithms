@@ -10,6 +10,9 @@ import java.util.Scanner;
  * https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0
  */
 public class KadanesAlgorithm {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         String str = "2\n" +

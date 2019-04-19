@@ -12,6 +12,9 @@ import java.util.LinkedList;
  * and progressively removing non-prime, composite numbers until only primes are left in a list.
  */
 public class SieveOfEratosthenes {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         TestCase.assertEquals(

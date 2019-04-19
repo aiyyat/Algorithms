@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
  */
 public class BestTimeToBuyAndSellStockWithTransactionFee {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         int[] a = new int[]{1, 3, 2, 8, 4, 9};

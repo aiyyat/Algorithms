@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ZeroMatrix {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testZeroMatrix1() {
         int[][] matrix = new int[][]{

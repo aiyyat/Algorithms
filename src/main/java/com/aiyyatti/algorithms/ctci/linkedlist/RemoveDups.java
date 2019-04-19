@@ -7,6 +7,9 @@ import org.junit.Test;
  * TODO Tricky - repointing cornercases.
  */
 public class RemoveDups {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         Node n1 = new Node(1);

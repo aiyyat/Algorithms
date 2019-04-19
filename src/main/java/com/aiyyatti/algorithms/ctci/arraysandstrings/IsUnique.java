@@ -9,6 +9,9 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class IsUnique {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simple1Test() {
         String str = "derwant";

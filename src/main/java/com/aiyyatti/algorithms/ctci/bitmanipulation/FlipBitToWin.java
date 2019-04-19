@@ -9,6 +9,9 @@ import org.junit.Test;
  * CSZ	1	0	1	2	3	0	1	2	3	0	1	2	3	0	1	2	3	4	0	1	2	3	4	0	0	1
  */
 public class FlipBitToWin {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         System.out.println(doFlipBitToWin(1775));

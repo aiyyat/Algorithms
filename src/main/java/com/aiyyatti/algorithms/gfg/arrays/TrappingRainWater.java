@@ -13,6 +13,9 @@ import java.util.Arrays;
  * https://www.geeksforgeeks.org/trapping-rain-water/
  */
 public class TrappingRainWater {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest1() {
         int[] container = {3, 0, 0, 2, 0, 4};

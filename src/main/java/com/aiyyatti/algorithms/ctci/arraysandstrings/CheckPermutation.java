@@ -2,6 +2,8 @@ package com.aiyyatti.algorithms.ctci.arraysandstrings;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
@@ -9,7 +11,11 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * TODO: you can sort and check with two indices.
  */
+@RunWith(Enclosed.class)
 public class CheckPermutation {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void test() {
         assertTrue(checkPermutation("category", "tea"));

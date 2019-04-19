@@ -6,6 +6,9 @@ import org.junit.Test;
  * https://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
  */
 public class MinimumNumberOfJumps {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         System.out.println(doMinimumNumberOfJumps(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}));

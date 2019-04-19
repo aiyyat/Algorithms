@@ -5,6 +5,9 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class TripleSteps {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         int K = 36;

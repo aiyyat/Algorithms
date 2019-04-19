@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class RobotInGrid {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleCannotReachTest() {
         int[][] matrix = new int[][]{

@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 public class Facotorial {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertEquals(120, factorial(5));

@@ -10,6 +10,9 @@ import java.util.Scanner;
  * https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0/?ref=self
  */
 public class PermutationsOfAGivenString {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         new PermutationsOfAGivenString().doPermutationsOfAGivenString("ABC", "");

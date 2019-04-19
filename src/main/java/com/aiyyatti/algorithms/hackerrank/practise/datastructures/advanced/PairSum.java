@@ -14,6 +14,9 @@ import java.util.regex.Pattern;
  * https://www.hackerrank.com/challenges/pair-sums/problem
  */
 public class PairSum {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         String str = "6\n" +

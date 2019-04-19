@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PowerSet {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         ArrayList<Integer> input = new ArrayList<>();

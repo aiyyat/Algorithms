@@ -8,6 +8,9 @@ import java.util.Stack;
  * TODO: learn from: https://www.youtube.com/watch?v=3YH0SZYAzOQ
  */
 public class TowersOfHanoi {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         doTowerOfHanoi(3);

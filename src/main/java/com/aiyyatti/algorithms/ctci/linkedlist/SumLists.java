@@ -9,6 +9,9 @@ import static junit.framework.TestCase.assertEquals;
  * TODO: Read the question properly.
  */
 public class SumLists {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         Node n1 = new NodeBuilder().add(7).add(1).add(6).build();

@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 public class Prime {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertTrue(isPrime(307));

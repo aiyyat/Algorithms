@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.hackerrank;
+package com.aiyyatti.algorithms.hackerrank.java;
 
 import org.junit.Test;
 

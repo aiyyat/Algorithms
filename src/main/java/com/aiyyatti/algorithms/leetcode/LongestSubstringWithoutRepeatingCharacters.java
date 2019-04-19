@@ -14,6 +14,9 @@ import java.util.Map;
  *        else if it exists in the hashmap, calculate the unique until value and store in the length.
  */
 public class LongestSubstringWithoutRepeatingCharacters {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void straightTest() {
         TestCase.assertEquals(4, doLongestSubstringWithoutRepeatingCharacters("cbabcdbbaeaf"));

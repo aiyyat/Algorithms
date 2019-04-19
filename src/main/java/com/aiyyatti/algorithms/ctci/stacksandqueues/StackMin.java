@@ -9,6 +9,9 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class StackMin {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 

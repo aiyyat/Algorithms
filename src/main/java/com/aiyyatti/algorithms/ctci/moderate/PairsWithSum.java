@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 public class PairsWithSum {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         int[] input = new int[]{-2, -1, 0, 3, 5, 6, 7, 9, 13, 14, 15};

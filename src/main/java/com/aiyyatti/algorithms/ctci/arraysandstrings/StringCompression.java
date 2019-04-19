@@ -4,6 +4,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 public class StringCompression {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         TestCase.assertEquals("", "aaabbcccccccdddefffghhh");

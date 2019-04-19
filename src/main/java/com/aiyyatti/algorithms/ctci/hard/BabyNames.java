@@ -11,6 +11,9 @@ import java.util.Map;
  * TODO: if you dont get the implementation of Graph right, you will never get this problem right.
  */
 public class BabyNames {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void ctciTest() {
         Node john = new Node("John", 15);

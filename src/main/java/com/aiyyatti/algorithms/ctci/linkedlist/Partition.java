@@ -6,6 +6,9 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 public class Partition {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testPartition() {
         Node n1 = new Node(1);

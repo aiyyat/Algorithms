@@ -7,6 +7,9 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class QueueViaStacks {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test(expected = EmptyStackException.class)
     public void simpleTest() {
         QueueViaStacksDS queue = new QueueViaStacksDS();

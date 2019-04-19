@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://www.geeksforgeeks.org/check-strings-rotations-not-set-2/
  */
 public class CheckIfStringsAreRotationsOfEachOtherOrNotset2 {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         TestCase.assertTrue(checkIfStringsAreRotationsOfEachOtherOrNotset2("ABCD", "BCDA"));

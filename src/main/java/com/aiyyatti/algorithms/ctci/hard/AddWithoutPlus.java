@@ -6,6 +6,9 @@ import org.junit.Test;
  * TODO: must revise the logic.
  */
 public class AddWithoutPlus {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void ctciTest() {
         System.out.println(doAddWithoutPlus(759, 674));

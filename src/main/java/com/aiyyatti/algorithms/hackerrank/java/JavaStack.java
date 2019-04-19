@@ -1,4 +1,4 @@
-package com.aiyyatti.algorithms.hackerrank;
+package com.aiyyatti.algorithms.hackerrank.java;
 
 import org.junit.Test;
 
@@ -6,6 +6,9 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class JavaStack {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         String str = "({()})";

@@ -7,6 +7,9 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 public class Intersection {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void ctciTest() {
         Node common = new NodeBuilder().add(7).add(2).add(1).build();

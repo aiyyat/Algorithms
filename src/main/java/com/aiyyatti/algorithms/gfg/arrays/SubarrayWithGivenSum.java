@@ -10,6 +10,9 @@ import java.util.Scanner;
  * https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
  */
 public class SubarrayWithGivenSum {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         doSubArrayWithGivenSum(10, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 15);

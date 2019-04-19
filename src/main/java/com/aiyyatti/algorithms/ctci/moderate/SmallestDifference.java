@@ -13,6 +13,9 @@ import java.util.Arrays;
  * Output 3. That is, the pair (11, 8).
  */
 public class SmallestDifference {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         int[] a1 = new int[]{1, 3, 15, 11, 2};

@@ -6,6 +6,9 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 public class DeleteMiddleNode {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void test() {
         Node n1 = new Node(1);

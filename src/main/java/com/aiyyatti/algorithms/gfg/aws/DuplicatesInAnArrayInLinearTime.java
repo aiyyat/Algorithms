@@ -18,6 +18,9 @@ import java.util.List;
  * (3) If in step 2 you encounter a negative number, then it means the element at index i in the array is a duplicate
  */
 public class DuplicatesInAnArrayInLinearTime {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         Integer[] arr = new Integer[]{1, 2, 2, 3, 1};

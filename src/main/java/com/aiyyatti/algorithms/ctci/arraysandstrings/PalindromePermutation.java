@@ -9,6 +9,9 @@ import org.junit.Test;
  * TODO: you can also use the bit operation if the strings are just a to z.
  */
 public class PalindromePermutation {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simple1Test() {
         assertTrue(checkPalindromePermutationWithDS("Tact Coa"));

@@ -1,9 +1,12 @@
-package com.aiyyatti.algorithms.ctci;
+package com.aiyyatti.algorithms.ctci.arraysandstrings;
 
 import junit.framework.TestCase;
 import org.junit.Test;
 
 public class StringRotation {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void test1StringRotation() {
         TestCase.assertTrue(doStringRotation(rotateBy("abcdefg", 4), "defgabcd"));

@@ -18,6 +18,9 @@ import static junit.framework.TestCase.assertEquals;
  * else return (completeBlocks * pow / 2) + ((start + 1) % pow);
  */
 public class MissingNumber {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         int[] a = new int[]{3, 4, 5, 7, 8};

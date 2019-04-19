@@ -7,6 +7,9 @@ import org.junit.Test;
  * https://www.programcreek.com/2014/01/leetcode-minimum-window-subsequence-java/
  */
 public class MinimumSubstringWithoutRepeatingCharacters {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple() {
         String s1 = "anananaadanannadanandannandanandand";

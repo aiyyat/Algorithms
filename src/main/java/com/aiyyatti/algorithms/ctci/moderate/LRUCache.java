@@ -9,6 +9,9 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class LRUCache {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     private static final Map<Integer, String> db = new Hashtable<>();
 
     @BeforeClass

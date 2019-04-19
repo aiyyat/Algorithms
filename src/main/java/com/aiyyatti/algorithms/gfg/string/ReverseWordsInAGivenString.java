@@ -9,6 +9,9 @@ import java.util.Scanner;
  * https://practice.geeksforgeeks.org/problems/reverse-words-in-a-given-string/0
  */
 public class ReverseWordsInAGivenString {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple1() {
         System.out.println(doReverseWordsInAGivenString("i.like.this.program.very.much"));

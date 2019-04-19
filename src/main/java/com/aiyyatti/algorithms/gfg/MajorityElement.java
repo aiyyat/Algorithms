@@ -1,3 +1,4 @@
+package com.aiyyatti.algorithms.gfg;
 
 import org.junit.Test;
 
@@ -6,6 +7,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class MajorityElement {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         System.out.println(doMajorityElement(new int[]{3, 1, 3, 3, 2}));

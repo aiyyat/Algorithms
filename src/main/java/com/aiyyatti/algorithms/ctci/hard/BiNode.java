@@ -3,6 +3,9 @@ package com.aiyyatti.algorithms.ctci.hard;
 import org.junit.Test;
 
 public class BiNode {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         Node n0 = new Node(0);

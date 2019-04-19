@@ -7,6 +7,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 public class JavaSHA256 {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() throws Exception {
         String str = "K1t4fo0V";

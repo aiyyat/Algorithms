@@ -12,6 +12,9 @@ import static junit.framework.TestCase.assertEquals;
  * TODO: read the second approach in CTCI.
  */
 public class ThreeInOne {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 

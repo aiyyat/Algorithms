@@ -10,6 +10,9 @@ import java.util.List;
  * https://leetcode.com/problems/combination-sum/
  */
 public class CombinationSum {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void testSimple1() {
         System.out.println(doCombinationSum(new int[]{2, 3, 6, 7}, 7));

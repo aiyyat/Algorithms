@@ -5,6 +5,9 @@ import org.junit.Test;
 import java.util.Arrays;
 
 public class RandomSet {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void simpleTest() {
         System.out.println(Arrays.toString(pickMlteratively(new int[]{1, 2, 3, 4, 5, 6, 7}, 6)));

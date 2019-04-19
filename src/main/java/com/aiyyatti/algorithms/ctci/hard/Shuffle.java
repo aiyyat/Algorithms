@@ -1,10 +1,13 @@
-package com.aiyyatti.algorithms.ctci.linkedlist;
+package com.aiyyatti.algorithms.ctci.hard;
 
 import org.junit.Test;
 
 import java.util.Arrays;
 
 public class Shuffle {
+    ////////////////
+    // TEST CASES //
+    ////////////////
     @Test
     public void shuffleTest() {
         int[] deck = new int[52];
