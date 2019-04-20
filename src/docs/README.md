@@ -1,3 +1,6 @@
+# TODOs
+learn IndexPriorityQueue: https://www.coursera.org/learn/algorithms-part2/lecture/HoHKu/prims-algorithm
+
 ##P & NP 
 Non Deterministic Polynomial Time Problems
 https://www.youtube.com/watch?v=e2cF8a5aAhE
@@ -40,8 +43,7 @@ If the graphs are not connected you will get a minimum spanning forest.Spanning 
 #Union Find
 The only purpose of this is to see if two nodes belongs to the same forest in other words if they are connected components.
 ######Note: let a be the array where for any index p value is the parent of p.
-```
-Quick Union: 
+### Quick Union: 
 ```
 Union Operation:
 ```
@@ -63,11 +65,33 @@ Union Operation:
 1) find the a[p], let it be pp. 
 2) find the a[q], let if be qp
 3) run a loop and change the values of pp to qp's.
+
 ```
 isConnected Operation:
 ``` 
 return a[p] == a[q]
+
 ```
 Union Find:
 ```
 Do the Quick Union but now based on the weights of the roots, add as child to the lesser weighted root.
+
+# Google
+https://careers.google.com/how-we-hire/interview/#interviews-for-all-roles
+```
+Evaluation Process:
+```
+- [x] General Cognative Ability
+
+- [x] Role Related Knowledge
+
+- [x] leadership
+
+- [x] Googlyness: 
+    * Comfort with ambuigity
+    * Bias to actions
+    * Collaborative nature
+
+- [ ] ~~Brain Teasers~~
+
+ Resume + Scores -> Hiring Comity -> Senior Hiring Leader -> Offer
