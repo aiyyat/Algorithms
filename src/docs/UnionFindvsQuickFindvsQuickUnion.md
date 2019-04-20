@@ -1,4 +1,4 @@
-#Purpose of these algorithms
+#Union Find
 The only purpose of this is to see if two nodes belongs to the same forest in other words if they are connected components.
 #### let a be the array where for any index p value is the parent of p.
 ##Quick Union: 
