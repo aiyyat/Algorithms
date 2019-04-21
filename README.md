@@ -50,6 +50,7 @@ If the graphs are not connected you will get a minimum spanning forest.Spanning 
 + Bipirate graph - a graph divided into two such that every node of one type connectes to one of the other. find perfect matching - students getting offers and companies (each with only one vacancy) offer multiple students-> each student gets one job
 + Sports elimination
 ## How difficult a graph problem?
+https://www.coursera.org/learn/algorithms-part2/lecture/6kk3F/graph-challenges
 1) Any Programmer can do it.
 2) diligent algo student
 3) Hire an Expert
@@ -60,6 +61,8 @@ If the graphs are not connected you will get a minimum spanning forest.Spanning 
 + Find a cycle - ```diligent algo student``` - DFS
 + Seven bridge of Koingsberg - given a graph is there a cycle such that each bridge can be visited exactly once? - ```diligent algo student``` - Eulers - a connected graph is Eulerean iff all vertices (excepting the start and ending ones) must have even degree.
 + Finding a cycle that visits every Vertex exactly once(Travelling salesman problem or Hamiltonian Cycle.) - ```Intractable``` - forms a Hamiltonion Cycle - Typical NP Complete Problem.
++ Given two graphs - are they identical except for the vertex names? ```No one knows``` We dont know how to classify the problem.
++ lay a graph in a plane such that there are no crossing edges - ```Hire an expert```- This is possible in linear time but too complicated to implement.
 ## Why Not?
 Dijkstras cannot be solved by DFS since now there is no way to decide if a node can be marked Visisted or not.
 
@@ -113,21 +116,41 @@ The && and || operators "**short-circuit**", meaning they ***don't*** evaluate t
 #P & NP 
 + **Polynomial Time (P) class problems** also called **Tractable Problems**: that can be solved and verified in polynomial times e.g. sorting and searching. can ```Solve``` and ```Verify``` in Polynomial Times, Shortest Path.
 + **Non Deterministic Polynomial Time (NP) class problems** also called **Intractable Problems**- can be verified in polynomial times (but probably not solvable in P times) e.g SUDOKU, prime factor, scheduling problem, Travelling sales man problem. In other words ```Hard to Solve``` but ```Easy to Verify``` takes ```Exponential Time``` are categorized in NP class.
-+ Hence P class Problems are a subset of NP Class Problems
-##Prove:
+```Hence P class Problems are a subset of NP Class Problems```
+```
+Prove that:
+```
 + If P == NP then Information Security is easy to crack, but Transportation, Scheduling, understanding DNA etc will become easy to solve.
 + If P != NP then you can classify a class of problems as not solvable in Polynomial Times
-##Reduction:
+```
+Reduction:
+```
 This is a way of classifying problems such that if one is solved other can also be solved:
 + If A can be reduced to B and B can be solved in P then A can be solved in P
 + If A is not solvable in P then B is not Solvable in P
-##NP Complete:
+```
+NP Complete:
+```
 A problem is NP Complete if
 1) it is verifiable in P but not solvable in P
 2) if all A's can be reduced B's that can be solved in P time.
-##NP Hard:
+**They are the Decision problems**
+```
+NP Hard:
+```
 1) Need to satisfy only the property 2 of NP Complete i.e. if all A's can be reduced B's that can be solved in P time.
-**In short NP Complete is a category of NP Hard Problems where the reduction will take P time**
+**They are the Optimization problems**
+
+```Note: In short NP Complete is a category of NP Hard Problems where the reduction will take P time```
+```
+Example
+```
+Knapsack Decision problem can be converted to Knapsack Optimization problem using dynamic programming.
+
+#Common Runtime Complexities
++ apart from the other common ones
++ pseudo polynomial - where the runtime depends on the numeric value of the input rather than the number of input values https://www.geeksforgeeks.org/pseudo-polynomial-in-algorithms/
+
 # Prepare:
 https://www.hackerrank.com/
 https://leetcode.com/
