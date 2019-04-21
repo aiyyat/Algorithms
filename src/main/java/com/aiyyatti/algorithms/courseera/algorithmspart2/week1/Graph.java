@@ -13,7 +13,6 @@ import java.util.Scanner;
 /**
  * https://www.coursera.org/learn/algorithms-part2/lecture/4ZE6G/graph-api
  */
-@RunWith(Enclosed.class)
 public class Graph {
     int V;
     int E;
@@ -65,6 +64,30 @@ public class Graph {
     private void addDirectionalEdge(int v1, int v2) {
         if (vs[v1] == null) vs[v1] = new ArrayList<>();
         vs[v1].add(v2);
+    }
+
+    public int V() {
+        return V;
+    }
+
+    public void V(int v) {
+        V = v;
+    }
+
+    public int E() {
+        return E;
+    }
+
+    public void E(int e) {
+        E = e;
+    }
+
+    public ArrayList<Integer>[] Vs() {
+        return vs;
+    }
+
+    public void Vs(ArrayList<Integer>[] vs) {
+        this.vs = vs;
     }
 }
 

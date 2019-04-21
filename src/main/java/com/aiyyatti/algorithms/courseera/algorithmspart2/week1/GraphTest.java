@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
-public class GraphTester {
+public class GraphTest {
     @Test
     public void simpleTest() {
         String str = "9\n" +

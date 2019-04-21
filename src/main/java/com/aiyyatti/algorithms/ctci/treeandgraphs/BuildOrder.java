@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
  * Zero Dependency Queue once parent build triggers a callback on the children. This way the TimeComplexity
  * can be O(N). Do this until the Queue is empty.
  * <p>
- * TODO: If the dependency was maintainted as a separate Data structure like a map it would have been much easier and efficient to solve the problem
+ * Alternate Approach: Topological Sort.
+ * TODO: If the dependency was maintained as a separate Data structure like a map it would have been much easier and efficient to solve the problem
  */
 public class BuildOrder {
     //////////////
