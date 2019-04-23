@@ -1,16 +1,9 @@
 # TODOs
 learn IndexPriorityQueue: https://www.coursera.org/learn/algorithms-part2/lecture/HoHKu/prims-algorithm
-#Algorithms
-```Note: The test cases are written along with the solution for readablility sake & to minimize need to navigate.```
-### Approach:
-* Read the Question until you understand it + 1 time.
-* Write the scenarios & corner Cases
-* Corner cases: Two Types
-    * Question Corner Cases. Define them soon after understanding question.
-    * Implementation Corner Case. Define them while/after writing the code.
-* Write pseudo code/implementation.
-* Reherse the scenarios/corner cases on implementation.
-* Code
+
+# Algorithms
+```*Note: The test cases are written along with the solution for readablility sake & to minimize need to navigate.```
+
 # DFS or BFS? 
 ```
 Depth-first Search
@@ -26,7 +19,7 @@ Breadth-first search can be used for finding the neighbour nodes in peer to peer
 + refer to CTCI: WordTransformer.
 + minimum number of hops in a communication network.
 + Shortest path to finding if friends.
-#Graphs
+# Graphs
 ## DI Graph: 
 + Build dependencies using topological sort.
 + Doing courses in College. Do the 101s before the others using topological sort.
@@ -66,10 +59,10 @@ https://www.coursera.org/learn/algorithms-part2/lecture/6kk3F/graph-challenges
 ## Why Not?
 Dijkstras cannot be solved by DFS since now there is no way to decide if a node can be marked Visisted or not.
 
-#Union Find Problems
+# Union Find Problems
 The only purpose of this is to see if two nodes belongs to the same forest in other words if they are connected components.
 ```Note: let a be the array where for any index p value is the parent of p.```
-##Quick Union: 
+## Quick Union: 
 ```
 Union Operation:
 ```
@@ -84,7 +77,7 @@ Check and return if the root of the first and second are the same.
  ```
  iterate through the root of p until p = root(p)
  
-##Quick Find
+## Quick Find
 ```
 Union Operation:
 ```
@@ -97,12 +90,12 @@ isConnected Operation:
 ``` 
 return a[p] == a[q]
 
-##Union Find:
+## Union Find:
 Do the Quick Union but now based on the weights of the roots, add as child to the lesser weighted root.
 
 # Short Circuit
 The && and || operators "**short-circuit**", meaning they ***don't*** evaluate the **right hand side** if it isn't necessary. The & and | operators, when used as **logical operators**, always evaluate both sides.
-#Tree & Graph
+# Tree & Graph
 ***Remember the implementation differences.*** Graph shouldn't be represented like a tree with multiple children as it can have loops. Instead Represent it as an Array of LinkedList and another array with visited or not, finally define a Dictionary of array index against the values.
 # Must Redos.
 * SearchInRotatedArray: see if you can fit in right>left
@@ -110,10 +103,10 @@ The && and || operators "**short-circuit**", meaning they ***don't*** evaluate t
     * check for middle element is odd or even. 
     * Do not use Queue with recursion. only use it with iteration else you will end up with checking a node against itself.
 * Matrix Rotation: layer Rotation. 
-#Collections
+# Collections
 * https://github.com/aiyyatti/JavaCollections
 * JUnit Assertion samples
-#P & NP 
+# P & NP 
 + **Polynomial Time (P) class problems** also called **Tractable Problems**: that can be solved and verified in polynomial times e.g. sorting and searching. can ```Solve``` and ```Verify``` in Polynomial Times, Shortest Path.
 + **Non Deterministic Polynomial Time (NP) class problems** also called **Intractable Problems**- can be verified in polynomial times (but probably not solvable in P times) e.g SUDOKU, prime factor, scheduling problem, Travelling sales man problem. In other words ```Hard to Solve``` but ```Easy to Verify``` takes ```Exponential Time``` are categorized in NP class.
 ```Hence P class Problems are a subset of NP Class Problems```
@@ -146,39 +139,7 @@ NP Hard:
 Example
 ```
 Knapsack Decision problem can be converted to Knapsack Optimization problem using dynamic programming.
+# Key Index Sorting
 
-#Common Runtime Complexities
-+ apart from the other common ones
+# less Common Runtime Complexities
 + pseudo polynomial - where the runtime depends on the numeric value of the input rather than the number of input values https://www.geeksforgeeks.org/pseudo-polynomial-in-algorithms/
-
-# Prepare:
-https://www.hackerrank.com/
-https://leetcode.com/
-https://www.techiedelight.com/
-Cracking the coding interview edition 6
-https://www.youtube.com/user/tusharroy2525
-Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne
-https://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
-https://www.careercup.com/page?pid=google-interview-questions&n=10
-
-# Google
-https://careers.google.com/how-we-hire/interview/#interviews-for-all-roles
-https://www.glassdoor.com.au/Interview/Google-Sydney-Interview-Questions-EI_IE9079.0,6_IL.7,13_IM962_IP2.htm?countryRedirect=true
-
-```
-Evaluation Process:
-```
-- [x] General Cognative Ability
-
-- [x] Role Related Knowledge
-
-- [x] leadership
-
-- [x] Googlyness: 
-    * Comfort with ambuigity
-    * Bias to actions
-    * Collaborative nature
-
-- [ ] ~~Brain Teasers~~
-
- Resume + Scores -> Hiring Comity -> Senior Hiring Leader -> Offer
