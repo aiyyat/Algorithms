@@ -28,6 +28,9 @@ public class RecursiveMultiply {
         return a > b ? recursiveMultiply(b, a) : recursiveMultiply(a, b);
     }
 
+    //////////////
+    // SOLUTION //
+    //////////////
     private int recursiveMultiply(int smaller, int larger) {
         if (smaller == 0) return 0;
         if (smaller == 1) return larger;
