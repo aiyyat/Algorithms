@@ -9,6 +9,9 @@ import static junit.framework.TestCase.assertEquals;
  * TODO: Super Complicated.
  */
 public class MedianOfTwoSortedArrays {
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
     public void simple0Test() {
         int[] shorter = new int[]{1, 2, 3};
