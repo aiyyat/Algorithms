@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an algorithm
  * to create a binary search tree with minimal height
- *
- *  TODO:
- *      public Node doMinimalTree(int start, int end, int[] input) => end not end-1
+ * <p>
+ * TODO:
+ * public Node doMinimalTree(int start, int end, int[] input) => end not end-1
  */
 public class MinimalTree {
     Logger logger = LoggerFactory.getLogger(MinimalTree.class);
@@ -21,6 +21,7 @@ public class MinimalTree {
 
     /**
      * Time Complexity: O(n)
+     *
      * @param start
      * @param end
      * @param input
@@ -29,7 +30,6 @@ public class MinimalTree {
     public Node doMinimalTree(int start, int end, int[] input) {
         if (end < start) return null;
         int mid = (start + end) / 2;
-        System.out.println(mid);
         Node node = new Node(input[mid]);
         node.left(doMinimalTree(start, mid - 1, input));
         node.right(doMinimalTree(mid + 1, end, input));
@@ -59,6 +59,26 @@ public class MinimalTree {
         n6.right(n7);
         TestCase.assertEquals(n3, doMinimalTree(input));
     }
+
+    @Test
+    public void test2Simple() {
+        int[] input = new int[]{0, 1, 2, 3, 4, 5, 6};
+        Node n0 = new Node(0);
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Node n5 = new Node(5);
+        Node n6 = new Node(6);
+        n3.left(n1);
+        n3.right(n5);
+        n1.left(n0);
+        n1.right(n2);
+        n5.left(n4);
+        n5.right(n6);
+        TestCase.assertEquals(n3, doMinimalTree(input));
+    }
+
 
     ////////////////////
     // DATA STRUCTURE //
