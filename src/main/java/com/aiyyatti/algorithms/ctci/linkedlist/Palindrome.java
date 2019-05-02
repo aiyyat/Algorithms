@@ -6,19 +6,20 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 /**
  * TODO:
- *      learn the Queue and Stack Implmentations in java.
- *      CTCI had a cleaner implementation -
- *      To know: what will the parameters to method be while
- *      doing reverse recursion?? - the original values.
- *      <p>
- *      I implemented it wrong - ended up adding to Queue until middle element and
- *      then returning and checking with polled value form Queue -
- *      in the end checking the element with itself.
- *      so if you are using recursion DO not use Queue.
+ * learn the Queue and Stack Implmentations in java.
+ * CTCI had a cleaner implementation -
+ * To know: what will the parameters to method be while
+ * doing reverse recursion?? - the original values.
+ * <p>
+ * I implemented it wrong - ended up adding to Queue until middle element and
+ * then returning and checking with polled value form Queue -
+ * in the end checking the element with itself.
+ * so if you are using recursion DO not use Queue.
  */
 public class Palindrome {
     //////////////
@@ -45,7 +46,7 @@ public class Palindrome {
     @Test
     public void evenNotPalindromewithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(1).build();
-        TestCase.assertFalse(isPalindrome(root));
+        assertFalse(isPalindrome(root));
     }
 
     @Test
@@ -57,7 +58,7 @@ public class Palindrome {
     @Test
     public void oddMoreThanOneNodeNotPalindromwithoutDSTest() {
         Node root = new NodeBuilder().add(0).add(1).add(2).build();
-        assertTrue(isPalindrome(root));
+        assertFalse(isPalindrome(root));
     }
 
     ////////////////
@@ -82,10 +83,12 @@ public class Palindrome {
     }
 
     public Result isPalindrome(Node root, int N) {
-        if (N < 0) return new Result(true, root.next);
-        else if (N == 0) return new Result(root.data == root.next.data, root.next);
-        Result result = isPalindrome(root.next, N -= 2);
-        return new Result(result.result || result.node.data == root.data, result.node.next);
+        if (N > 0) {
+            Result result = isPalindrome(root.next, N - 2);
+            return new Result(result.result && result.node.data == root.data, result.node.next);
+        } else if (N == -1) return new Result(true, root.next);
+        else if (N == -2) return new Result(true, root);
+        return new Result(root.data == root.next.data, null);
     }
 
     class Node {

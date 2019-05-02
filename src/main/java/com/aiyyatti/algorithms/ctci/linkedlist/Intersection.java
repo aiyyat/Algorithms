@@ -11,6 +11,15 @@ public class Intersection {
     // TEST CASES //
     ////////////////
     @Test
+    public void simpleTest() {
+        Node common = new NodeBuilder().add(7).add(2).add(1).build();
+        Node root1 = new NodeBuilder().add(3).add(9).add(common).build();
+        Node root2 = new NodeBuilder().add(13).add(9).add(common).build();
+        Node intersectionNode = doIntersection(root1, root2);
+        assertEquals(9, intersectionNode.data);
+    }
+
+    @Test
     public void ctciTest() {
         Node common = new NodeBuilder().add(7).add(2).add(1).build();
         Node root1 = new NodeBuilder().add(3).add(1).add(5).add(9).add(common).build();
@@ -38,7 +47,6 @@ public class Intersection {
             shorter = root1;
             longer = root2;
         }
-
         for (int i = 0; i < Math.abs(diff); i++) longer = longer.next;
         while (shorter != null) {
             if (shorter.data == longer.data) return shorter;
