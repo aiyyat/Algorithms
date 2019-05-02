@@ -23,6 +23,12 @@ public class CheckBalanced {
         return heightDiff(root) != Integer.MIN_VALUE;
     }
 
+    /**
+     * Reserve the MAX_VALUE for a possible value for the height Diff
+     *
+     * @param root
+     * @return
+     */
     public int heightDiff(Node root) {
         if (root == null) return -1;
         else {
@@ -82,6 +88,7 @@ public class CheckBalanced {
         n5.right(n7);
         TestCase.assertFalse(doCheckBalanced(n0));
     }
+
     @Test
     public void testSimple4() {
         Node n0 = new Node(0);
