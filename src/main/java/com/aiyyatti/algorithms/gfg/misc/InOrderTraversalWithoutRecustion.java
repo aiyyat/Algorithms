@@ -7,7 +7,7 @@ import java.util.Stack;
 
 /**
  * https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
- *
+ * <p>
  * InOrder Traversal without Recursion
  */
 public class InOrderTraversalWithoutRecustion {
@@ -26,15 +26,16 @@ public class InOrderTraversalWithoutRecustion {
         stack.push(root);
         StringBuilder output = new StringBuilder("");
         while (!stack.isEmpty()) {
-            Node node = stack.peek();
+            Node node = stack.pop();
             if (node == null) {
-                stack.pop();
-                if (!stack.isEmpty()) {
-                    Node prevToThat = stack.pop();
-                    output.append(prevToThat + " ");
-                    stack.push(prevToThat.right);
-                }
-            } else stack.push(node.left);
+                if (!stack.isEmpty()) output.append(stack.pop().data + " ");
+            } else {
+                Node left = node.left;
+                Node right = node.right;
+                stack.push(right);
+                stack.push(node);
+                stack.push(left);
+            }
         }
         return output.toString();
     }
