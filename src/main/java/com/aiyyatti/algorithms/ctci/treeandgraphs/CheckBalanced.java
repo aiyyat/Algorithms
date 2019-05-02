@@ -3,6 +3,9 @@ package com.aiyyatti.algorithms.ctci.treeandgraphs;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+
 /**
  * Check Balanced: Implement a function to check if a binary tree is balanced. For the purposes of
  * this question, a balanced tree is defined to be a tree such that the heights of the two subtrees of any
@@ -10,7 +13,8 @@ import org.junit.Test;
  * <p>
  * <p>
  * TODO
- * Read the definition properly.
+ * Rule: For a tree to be balanced the absolute value of the left and
+ * right node heights should be 0 or 1
  */
 public class CheckBalanced {
     /**
@@ -64,7 +68,7 @@ public class CheckBalanced {
         n5.left(n6);
         n5.right(n7);
         n4.left(n8);
-        TestCase.assertFalse(doCheckBalanced(n0));
+        assertFalse(doCheckBalanced(n0));
     }
 
     @Test
@@ -86,7 +90,30 @@ public class CheckBalanced {
         n4.right(n8);
         n5.left(n6);
         n5.right(n7);
-        TestCase.assertFalse(doCheckBalanced(n0));
+        assertFalse(doCheckBalanced(n0));
+    }
+
+    /**
+     * True by Definition
+     */
+    @Test
+    public void testSimple5() {
+        Node n0 = new Node(0);
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Node n5 = new Node(5);
+        Node n6 = new Node(6);
+        Node n7 = new Node(7);
+        n0.left(n1);
+        n0.right(n6);
+        n1.left(n2);
+        n1.right(n3);
+        n2.left(n4);
+        n3.right(n5);
+        n6.right(n7);
+        assertTrue(doCheckBalanced(n0));
     }
 
     @Test
