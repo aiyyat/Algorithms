@@ -64,6 +64,12 @@ public class InOrderTraversalWithoutRecustion {
         TestCase.assertEquals(inOrder(n0), doInOrderTraversalWithoutRecursion(n0));
     }
 
+    @Test
+    public void test2Simple() {
+        Node n0 = new Node(0);
+        TestCase.assertEquals(inOrder(n0), doInOrderTraversalWithoutRecursion(n0));
+    }
+
     public String inOrder(Node root) {
         if (root == null) return "";
         return inOrder(root.left()) + root.data + " " + inOrder(root.right());
