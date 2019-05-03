@@ -13,17 +13,7 @@ import java.util.stream.Collectors;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * <b>Build Order:</b> You are given a list of projects and a list of dependencies (which is a list of pairs of
- * projects, where the second project is dependent on the first project). All of a project's dependencies
- * must be built before the project is. Find a build order that will allow the projects to be built. If there
- * is no valid build order, return an error.
- * <p>
- * <b>Alternate Approach:</b>
- * Instead try if you can use a callback to inform a child that a parent is built. Also you can add to a
- * Zero Dependency Queue once parent build triggers a callback on the children. This way the TimeComplexity
- * can be O(N). Do this until the Queue is empty.
- * <p>
- * Alternate Approach: Topological Sort.
+ * TODO: Try Topological Sort.
  * TODO: If the dependency was maintained as a separate Data structure like a map it would have been much easier and efficient to solve the problem
  */
 public class BuildOrder {
