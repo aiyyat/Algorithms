@@ -10,6 +10,9 @@ import static junit.framework.TestCase.assertEquals;
 public class WordTransformer {
     private Set<String> dict = new HashSet<>();
 
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
     public void wildyTest() {
         Wildy wildy = new Wildy();
@@ -28,6 +31,9 @@ public class WordTransformer {
         assertEquals("damp<-lamp<-->lame->lake->like", doWordTransformer(left, right));
     }
 
+    //////////////
+    // SOLUTION //
+    //////////////
     public String doWordTransformer(Wordy left, Wordy right) {
         while (left.isThereMoreToVisit() || right.isThereMoreToVisit()) {
             WordNode[] leftCheck = transformAndSearch(left, right);
