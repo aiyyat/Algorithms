@@ -1,6 +1,9 @@
 package com.aiyyatti.algorithms.ctci.sortingandsearching;
 
+import junit.framework.TestCase;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
 
 public class RankFromStream {
     @Test
@@ -15,9 +18,9 @@ public class RankFromStream {
         ranker.track(7);
         ranker.track(13);
         ranker.track(3);
-        System.out.println(ranker.getRankOfNumber(1));
-        System.out.println(ranker.getRankOfNumber(3));
-        System.out.println(ranker.getRankOfNumber(4));
+        assertEquals(0, ranker.getRankOfNumber(1));
+        assertEquals(1, ranker.getRankOfNumber(3));
+        assertEquals(2, ranker.getRankOfNumber(4));
     }
 
     class Ranker {
