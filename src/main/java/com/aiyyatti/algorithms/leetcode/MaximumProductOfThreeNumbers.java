@@ -1,4 +1,4 @@
-  package com.aiyyatti.algorithms.leetcode;
+package com.aiyyatti.algorithms.leetcode;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class MaximumProductOfThreeNumbers {
     ////////////////
     @Test
     public void simpleTest() {
-        TestCase.assertEquals(1498, doMaximumProductOfThreeNumbers(new int[]{1, 2, 3, 4, 5, 6, 7, -2, -7 - 100}, 3));
+        TestCase.assertEquals(4900, doMaximumProductOfThreeNumbers(new int[]{1, 2, 3, 4, 5, 6, 7, -2, -7 - 100}, 3));
     }
 
     @Test
@@ -34,21 +34,6 @@ public class MaximumProductOfThreeNumbers {
 
 
     public int doMaximumProductOfThreeNumbers(int[] a, int K) {
-        if (a.length < K) return -1;
-        Arrays.sort(a);
-        long max = 1;
-        int N = a.length;
-        long localMax = 1;
-        for (int i = N - K; i < N; i++) {
-            localMax *= a[i];
-        }
-        max = localMax;
-        if (N >= K + 2) {
-            for (int i = 0; i < K - 1; i += 2) {
-                localMax = (a[i] * a[i + 1] * localMax) / (a[N - K + i] * a[N - K + i + 1]);
-                max = Math.max(localMax, max);
-            }
-        }
-        return (int) max;
+        return -1;
     }
 }
