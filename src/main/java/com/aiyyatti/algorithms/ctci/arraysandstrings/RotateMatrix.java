@@ -7,7 +7,12 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * TODO: very tricky problem. tip: do not use start and end. atleast dont precalculate end or the offset will be included twice.
+ * TODO: implementation is very tricky.
+ * Things to remember:
+ * 1) Approach the problem with a 5*5 matrix. this is to test the edge cases of (1) inner layer (2) single middle element.
+ * 2) Represent each edge with a number this way you can recheck individual edge rotation
+ * 3) Rotation transformation (or movement of each element of that group) the order is important.
+ * 4) after each edge rotation retest it with a value of the inner matrix.
  */
 public class RotateMatrix {
     @Test
@@ -64,14 +69,19 @@ public class RotateMatrix {
     }
 
     public void rotate(int[][] a) {
-        int N = a.length;
-        for (int start = 0; start < N / 2; start++) {
-            for (int i = start; i < N - 1 - start; i++) {
-                int temp = a[start][i];
-                a[start][i] = a[N - 1 - i][start];
-                a[N - 1 - i][start] = a[N - 1 - start][N - 1 - i];
-                a[N - 1 - start][N - 1 - i] = a[i][N - 1 - start];
-                a[i][N - 1 - start] = temp;
+        int N = a.length - 1;
+        for (int i = 0; i < N / 2; i++) {
+            for (int j = i; j < N - i; j++) {
+                // 2 => temp
+                int temp = a[N - j][N - i];
+                // 1 => 2
+                a[N - j][N - i] = a[i][N - j];
+                // 4 => 1
+                a[i][N - j] = a[j][i];
+                // 3 => 4
+                a[j][i] = a[N - i][j];
+                // 2 => 3
+                a[N - i][j] = temp;
             }
         }
     }
