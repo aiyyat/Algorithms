@@ -80,7 +80,7 @@ public class RotateMatrix {
                 a[i][N - j] = a[j][i];
                 // 3 => 4
                 a[j][i] = a[N - i][j];
-                // 2 => 3
+                // temp => 3
                 a[N - i][j] = temp;
             }
         }
