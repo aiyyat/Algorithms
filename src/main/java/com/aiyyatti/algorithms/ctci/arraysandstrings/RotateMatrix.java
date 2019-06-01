@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * 1) Approach the problem with a 5*5 matrix. this is to test the edge cases of (1) inner layer (2) single middle element.
  * 2) Represent each edge with a number this way you can recheck individual edge rotation
  * 3) Rotation transformation (or movement of each element of that group) the order is important.
- * 4) after each edge rotation retest it with a value of the inner matrix.
+ * 4) after each edge rotation "RECHECK" it with a value of the inner matrix.
  */
 public class RotateMatrix {
     @Test
