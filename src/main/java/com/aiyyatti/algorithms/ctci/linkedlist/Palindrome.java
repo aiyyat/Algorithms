@@ -68,27 +68,37 @@ public class Palindrome {
         boolean result;
         Node node;
 
-        public Result(boolean result, Node node) {
+        public Result(Node node, boolean result) {
             this.result = result;
             this.node = node;
         }
+
+        public Result(boolean result, Node node) {
+            this.node = node;
+            this.result = result;
+        }
     }
 
-    //TODO: REDO
     //corner - root is null
     public boolean isPalindrome(Node root) {
-        int N = 0;
-        for (Node node = root; node != null; node = node.next) N++;
-        return isPalindrome(root, N - 2).result;
+        int count = 0;
+        Node head = root;
+        while (head != null) {
+            count++;
+            head = head.next;
+        }
+        return isPalindrome(root, count - 2).result;
     }
 
-    public Result isPalindrome(Node root, int N) {
-        if (N > 0) {
-            Result result = isPalindrome(root.next, N - 2);
-            return new Result(result.result && result.node.data == root.data, result.node.next);
-        } else if (N == -1) return new Result(true, root.next);
-        else if (N == -2) return new Result(true, root);
-        return new Result(root.data == root.next.data, null);
+    public Result isPalindrome(Node root, int position) {
+        // two element case explicitly and even number of 2+ element case.
+        if (position == 0) return new Result(root, root.data == root.next.data);
+        else if (position == -1) return new Result(root.next, true);
+        else if (position > 0) {
+            Result m = isPalindrome(root.next(), position - 2);
+            if (!m.result || root.data != m.node.data) return new Result(false, null);
+            else return new Result(true, m.node.next);
+        } else return new Result(null, false);
     }
 
     class Node {
