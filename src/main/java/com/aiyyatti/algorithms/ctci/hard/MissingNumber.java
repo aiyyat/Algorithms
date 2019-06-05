@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -43,12 +44,7 @@ public class MissingNumber {
     public void simple2Test() {
         int[] a = new int[]{3, 4, 5, 7, 0, 2, 1};
         assertEquals(6, findMissingNumber(a, 7));
-        assertEquals(6, findMissingNumberBruteForce(a, 8, 3));
-    }
-
-    @Test
-    public void testFindMissingNumber() {
-        findMissingNumberBruteForce(null, 11, 2);
+        assertEquals(6, findMissingNumberBruteForce(a, 7));
     }
 
     //////////
@@ -56,26 +52,22 @@ public class MissingNumber {
     //////////
     public int findMissingNumber(int[] a, int end) {
         int M = Integer.toBinaryString(end).length();
-        return doFindMissingNumber(a, M, 0);
+        // TODO Note the conversion.
+        return doFindMissingNumber(Arrays.stream(a).boxed().collect(Collectors.toList()), M, 0);
     }
 
-    public int doFindMissingNumber(int[] a, int M, int current) {
+    public int doFindMissingNumber(List<Integer> a, int M, int current) {
         if (current == M) return 0;
-        int N = a.length;
+        int N = a.size();
         List<Integer> zeros = new ArrayList<>();
         List<Integer> ones = new ArrayList<>();
         for (int j = 0; j < N; j++) {
-            if ((a[j] & 1 << (current)) == 0) zeros.add(a[j]);
-            else ones.add(a[j]);
+            Integer jth = a.get(j);
+            if ((jth & 1 << (current)) == 0) zeros.add(jth);
+            else ones.add(jth);
         }
-        int missing = 1;
-        if (zeros.size() <= ones.size()) {
-            missing = 0;
-            return (doFindMissingNumber(zeros.stream().mapToInt(Integer::intValue).toArray(), M, current + 1)) << 1;
-        } else {
-            missing = 1;
-            return (doFindMissingNumber(ones.stream().mapToInt(Integer::intValue).toArray(), M, current + 1)) << 1 | 1;
-        }
+        if (zeros.size() <= ones.size()) return (doFindMissingNumber(zeros, M, current + 1)) << 1;
+        else return (doFindMissingNumber(ones, M, current + 1)) << 1 | 1;
     }
 
     /////////////////
