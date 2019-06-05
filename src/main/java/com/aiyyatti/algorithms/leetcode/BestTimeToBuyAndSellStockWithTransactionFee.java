@@ -15,6 +15,15 @@ public class BestTimeToBuyAndSellStockWithTransactionFee {
         int[] a = new int[]{1, 3, 2, 8, 4, 9};
         int fee = 2;
         TestCase.assertEquals(8, ownNotOwnApproach(a, fee));
+        TestCase.assertEquals(8, peakValleyApproach(a, fee));
+    }
+
+    @Test
+    public void simple1Test() {
+        int[] a = new int[]{5, 2, 3, 1, 4};
+        int fee = 2;
+        TestCase.assertEquals(1, ownNotOwnApproach(a, fee));
+        TestCase.assertEquals(1, peakValleyApproach(a, fee));
     }
 
     public int ownNotOwnApproach(int[] a, int fee) {
@@ -27,17 +36,24 @@ public class BestTimeToBuyAndSellStockWithTransactionFee {
             own = tempOwn;
             notOwn = tempNotOwn;
         }
-        return Math.max(own, notOwn);
+        return notOwn;
     }
 
     public int peakValleyApproach(int[] a, int fee) {
         int N = a.length;
-        int boughtAt = a[0];
-        int balance = 0;
-        for(int i=1;i<N;i++){
-            if(a[i]>a[i+1]) {
-                balance+=boughtAt-a[i];
+        int start = a[0];
+        int txn = 0;
+        for (int i = 1; i < N; i++) {
+            if (start >= a[i] - 2) {
+                if (a[i] < start) start = a[i];
+            } else if (i == N - 1 || a[i + 1] < a[i]) {
+                txn += a[i] - 2 - start;
+                if (i < N - 1) {
+                    start = a[i + 1];
+                    i++;
+                }
             }
         }
+        return txn;
     }
 }

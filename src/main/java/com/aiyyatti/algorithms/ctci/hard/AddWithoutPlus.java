@@ -1,9 +1,11 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
- * TODO: must revise the logic.
+ * TODO: Revise logic.
+ * Note: it works well with negative numbers as well.
  */
 public class AddWithoutPlus {
     ////////////////
@@ -11,20 +13,42 @@ public class AddWithoutPlus {
     ////////////////
     @Test
     public void ctciTest() {
-        System.out.println(doAddWithoutPlus(759, 674));
+        TestCase.assertEquals(1406, doAddWithoutPlus(759, 647));
+    }
+
+    public void simple1Test() {
+        TestCase.assertEquals(12, doAddWithoutPlus(7, 5));
+    }
+
+    @Test
+    public void simple2Test() {
+        TestCase.assertEquals(-2, doAddWithoutPlus(-7, 5));
+    }
+
+    @Test
+    public void simple3Test() {
+        TestCase.assertEquals(2, doAddWithoutPlus(7, -5));
+    }
+
+    @Test
+    public void simple5Test() {
+        TestCase.assertEquals(-12, doAddWithoutPlus(-7, -5));
+    }
+
+    @Test
+    public void simple4Test() {
+        TestCase.assertEquals(7, doAddWithoutPlus(7, 0));
     }
 
     public int doAddWithoutPlus(int num1, int num2) {
-        // num1 ^ num2 - sum without carry
-        // num1 & numb2 - carry whhout sum
-        int carry = 0;
-        int sumWithoutCarry = 0;
-        do {
-            sumWithoutCarry = num1 ^ num2;
-            carry = num1 & num2;
-            num1 = sumWithoutCarry;
-            num2 = carry << 1;
-        } while (carry != 0);
+        int sumWithoutCarry = num1 ^ num2;
+        int carryWithoutSum = (num1 & num2) << 1;
+        while (carryWithoutSum != 0) {
+            int tempSumWithoutCarry = sumWithoutCarry ^ carryWithoutSum;
+            int tempCarryWithoutSum = (sumWithoutCarry & carryWithoutSum) << 1;
+            sumWithoutCarry = tempSumWithoutCarry;
+            carryWithoutSum = tempCarryWithoutSum;
+        }
         return sumWithoutCarry;
     }
 }
