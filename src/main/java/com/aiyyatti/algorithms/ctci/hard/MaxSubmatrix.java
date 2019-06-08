@@ -30,6 +30,12 @@ public class MaxSubmatrix {
         System.out.println(doMaxSubmatrix(a));
     }
 
+    /**
+     * brute force is when not doing Kadanes. the TC goes to O(N^4) else its O(N^3)
+     *
+     * @param a
+     * @return
+     */
     public int doMaxSubmatrix(int[][] a) {
         int N = a.length;
         int max = Integer.MIN_VALUE;
