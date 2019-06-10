@@ -8,6 +8,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * https://www.hackerrank.com/contests/amazon/challenges/shortest-sub-segment
+ */
 public class ShortestSubSegment {
     @Test
     public void hackerRankTest() {
