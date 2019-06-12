@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+
 /**
  * Coins: Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents), and
  * pennies (1 cent), write code to calculate the number of ways of representing n cents.
@@ -19,23 +21,26 @@ public class Coins {
     ////////////////
     @Test
     public void simpleTest1() {
-        TestCase.assertEquals(4, numberOfWaysOfRepresending(10));
+        TestCase.assertEquals(9, numberOfWaysOfRepresending(10));
     }
 
     private int numberOfWaysOfRepresending(int N) {
-        return numberOfWaysOfRepresending(0, N, "");
+        int[] memo = new int[N];
+        Arrays.fill(memo, -1);
+        return numberOfWaysOfRepresending(0, N, memo);
     }
 
-    private int numberOfWaysOfRepresending(int index, int remainingAmount, String str) {
-        if (index > COINS.length || remainingAmount < 0) return 0;
-        if (remainingAmount == 0) {
-            logger.info("{}", str);
+    private int numberOfWaysOfRepresending(int sum, int N, int[] memo) {
+        if (sum > N) return 0;
+        else if (sum == N) {
             return 1;
         }
-        int numOfWays = 0;
-        for (int i = index; i < COINS.length; i++) {
-            numOfWays += numberOfWaysOfRepresending(i, remainingAmount - COINS[i], str + " " + COINS[i]);
+        if (memo[sum] == -1) {
+            memo[sum] = numberOfWaysOfRepresending(sum + 25, N, memo) +
+                    numberOfWaysOfRepresending(sum + 10, N, memo) +
+                    numberOfWaysOfRepresending(sum + 5, N, memo) +
+                    numberOfWaysOfRepresending(sum + 1, N, memo);
         }
-        return numOfWays;
+        return memo[sum];
     }
 }
