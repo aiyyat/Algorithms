@@ -25,7 +25,7 @@ public class ShortestSubSegment {
         int count = scanner.nextInt();
         String[] a = new String[count];
         for (int i = 0; i < count; i++) {
-            a[i] = scanner.nextLine().toLowerCase();
+            a[i] = scanner.next().toLowerCase();
         }
         System.out.println(doShortestSubSegment(input, a));
     }
