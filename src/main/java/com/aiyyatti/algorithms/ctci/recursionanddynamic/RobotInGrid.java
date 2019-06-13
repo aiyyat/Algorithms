@@ -4,6 +4,10 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 
 public class RobotInGrid {
     ////////////////
@@ -12,78 +16,72 @@ public class RobotInGrid {
     @Test
     public void simpleCannotReachTest() {
         int[][] matrix = new int[][]{
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, STOP},//1
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, OPEN},//2
-                new int[]{STOP, STOP, STOP, OPEN, STOP, OPEN},//3
-                new int[]{OPEN, OPEN, OPEN, OPEN, STOP, OPEN},//4
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, OPEN},//5
-                new int[]{OPEN, OPEN, OPEN, OPEN, OPEN, OPEN},//6
-                new int[]{OPEN, STOP, OPEN, OPEN, OPEN, OPEN},//7
-                new int[]{STOP, OPEN, OPEN, STOP, OPEN, OPEN},//8
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, OPEN},//9
-                new int[]{OPEN, OPEN, OPEN, STOP, OPEN, OPEN},//10
-                new int[]{OPEN, OPEN, OPEN, OPEN, STOP, OPEN},//11
-                new int[]{OPEN, STOP, OPEN, OPEN, OPEN, OPEN},//12
-                new int[]{OPEN, OPEN, OPEN, OPEN, OPEN, OPEN}//13
+                new int[]{O, O, X, O, X, X},//1
+                new int[]{O, O, X, O, X, O},//2
+                new int[]{X, X, X, O, X, O},//3
+                new int[]{O, O, O, O, X, O},//4
+                new int[]{O, O, X, O, X, O},//5
+                new int[]{O, O, O, O, O, O},//6
+                new int[]{O, X, O, O, O, O},//7
+                new int[]{X, O, O, X, O, O},//8
+                new int[]{O, O, X, O, X, O},//9
+                new int[]{O, O, O, X, O, O},//10
+                new int[]{O, O, O, O, X, O},//11
+                new int[]{O, X, O, O, O, O},//12
+                new int[]{O, O, O, O, O, O}//13
         };
-        ArrayList<Point> path = new ArrayList<>();
-        TestCase.assertFalse(doRobotInGrid(matrix.length - 1, matrix[0].length - 1, matrix, path));
+        assertFalse(doRobotInGrid(matrix));
     }
 
     @Test
     public void simpleCanReachTest() {
         int[][] matrix = new int[][]{
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, STOP},//1
-                new int[]{OPEN, OPEN, OPEN, OPEN, STOP, OPEN},//2
-                new int[]{STOP, STOP, STOP, OPEN, STOP, OPEN},//3
-                new int[]{OPEN, OPEN, OPEN, OPEN, STOP, OPEN},//4
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, OPEN},//5
-                new int[]{OPEN, OPEN, OPEN, OPEN, OPEN, OPEN},//6
-                new int[]{OPEN, STOP, OPEN, OPEN, OPEN, OPEN},//7
-                new int[]{STOP, OPEN, OPEN, STOP, OPEN, OPEN},//8
-                new int[]{OPEN, OPEN, STOP, OPEN, STOP, OPEN},//9
-                new int[]{OPEN, OPEN, OPEN, STOP, OPEN, OPEN},//10
-                new int[]{OPEN, OPEN, OPEN, OPEN, STOP, OPEN},//11
-                new int[]{OPEN, STOP, OPEN, OPEN, OPEN, OPEN},//12
-                new int[]{OPEN, OPEN, OPEN, OPEN, OPEN, OPEN}//13
+                new int[]{O, O, X, O, X, X},//1
+                new int[]{O, O, O, O, X, O},//2
+                new int[]{X, X, X, O, X, O},//3
+                new int[]{O, O, O, O, X, O},//4
+                new int[]{O, O, X, O, X, O},//5
+                new int[]{O, O, O, O, X, O},//6
+                new int[]{O, X, O, O, O, O},//7
+                new int[]{X, O, O, X, O, O},//8
+                new int[]{O, O, X, O, X, O},//9
+                new int[]{O, O, O, X, O, O},//10
+                new int[]{O, O, O, O, X, O},//11
+                new int[]{O, X, O, O, O, O},//12
+                new int[]{O, O, O, O, O, O}//13
         };
-        ArrayList<Point> path = new ArrayList<>();
-        TestCase.assertTrue(doRobotInGrid(matrix.length - 1, matrix[0].length - 1, matrix, path));
+        assertTrue(doRobotInGrid(matrix));
     }
 
-    int FAIL = 2;
-    int STOP = 1;
-    int OPEN = 0;
+    int VISITED = 2;
+    int X = 1;
+    int O = 0;
 
-    public boolean doRobotInGrid(int row, int column, int[][] matrix, ArrayList<Point> path) {
-        if (row == 0 && column == 0) return true; // Reached Home
-        boolean top = (row > 0) && (matrix[row - 1][column] == OPEN);
-        boolean left = (column > 0) && (matrix[row][column - 1] == OPEN);
-        boolean goodCell = false;
-        if (!top && !left) goodCell = false;
-        else {
-            if (top) goodCell |= doRobotInGrid(row - 1, column, matrix, path);
-            if (left) goodCell |= doRobotInGrid(row, column - 1, matrix, path);
-        }
-        if (!goodCell) matrix[row][column] = FAIL;
-        return goodCell;
+    public boolean doRobotInGrid(int[][] matrix) {
+        return doRobotInGrid(0, 0, matrix);
     }
 
-    class Point {
-        int row;
-        int column;
+    public boolean doRobotInGrid(int row, int column, int[][] matrix) {
+        if (!withinLimits(matrix, row, column) || matrix[row][column] >= X) return false;
+        matrix[row][column] = VISITED;
+        if (metEnd(matrix, row, column)) return true;
+        else if (doRobotInGrid(row, column + 1, matrix)) return true;
+        else if (doRobotInGrid(row + 1, column, matrix)) return true;
+        else return false;
+    }
 
-        public Point(int row, int column) {
-            this.row = row;
-            this.column = column;
-        }
+    private boolean metEnd(int[][] matrix, int row, int column) {
+        return (row == matrix.length - 1) && (column == matrix[0].length - 1);
+    }
 
-        public void row(int row) {
-            this.row = row;
-        }
+    private boolean withinLimits(int[][] matrix, int row, int column) {
+        if (row < matrix.length && column < matrix[0].length) return true;
+        return false;
+    }
 
-        public void column(int column) {
-            this.column = column;
-        }
+    public void print(int[][] matrix) {
+        System.out.println();
+        Arrays.stream(matrix).forEach(row -> System.out.println(Arrays.toString(row)));
+        System.out.println();
     }
 }

@@ -1,5 +1,6 @@
 package com.aiyyatti.algorithms.ctci.recursionanddynamic;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,8 +12,7 @@ public class TripleSteps {
     @Test
     public void simpleTest() {
         int K = 36;
-        System.out.println(doTripleSteps(K));
-        System.out.println(doRecursion(K));
+        TestCase.assertEquals(doTripleSteps(K), doRecursion(K));
     }
 
     int steps[] = new int[]{1, 2, 3};
@@ -41,21 +41,22 @@ public class TripleSteps {
     public int doRecursion(int K) {
         int[] memo = new int[K + 1];
         Arrays.fill(memo, -1);
-        return doRecursion(K, memo);
+        return doRecursion(0, K, memo);
     }
 
     /**
-     * without memo: O(3^K)
-     * with memo: O(K * S)
+     * without memo: O(3^steps)
+     * with memo: O(steps * S)
      *
-     * @param K
+     * @param steps
      * @param memo
      * @return
      */
-    public int doRecursion(int K, int[] memo) {
-        if (K < 0) return 0;
-        else if (K == 0) return 1;
-        if (memo[K] != -1) return memo[K];
-        return (memo[K] = doRecursion(K - 1, memo) + doRecursion(K - 2, memo) + doRecursion(K - 3, memo));
+    public int doRecursion(int steps, int N, int[] memo) {
+        if (steps > N) return 0;
+        else if (steps == N) return 1;
+        else if (memo[steps] == -1)
+            memo[steps] = doRecursion(steps + 1, N, memo) + doRecursion(steps + 2, N, memo) + doRecursion(steps + 3, N, memo);
+        return memo[steps];
     }
 }

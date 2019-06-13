@@ -24,6 +24,7 @@ public class Parens {
         System.out.println(actual);
     }
 
+
     public Set<String> doParens(int N) {
         HashSet<String> input = new HashSet<>();
         input.add("()");
