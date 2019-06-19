@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import static org.apache.commons.lang3.ArrayUtils.toObject;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.slf4j.LoggerFactory.getLogger;
 
