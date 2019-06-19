@@ -42,7 +42,7 @@ public class Permutations {
     //////////////
     int doPermutations(String str, int index) {
         if (index == 0) {
-            System.out.println(str);
+            logger.debug(str);
             return 1;
         }
         int output = 0;
