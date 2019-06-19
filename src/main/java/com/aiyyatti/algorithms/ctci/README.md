@@ -10,3 +10,10 @@ String search
 * <b>Rabin Karp</b> https://www.youtube.com/watch?v=H4VrKHVG5qI 
 * <b>Boyer Moore</b>
 * <b>Z Algorithm</b>
+
+```
+String common
+```
+* find the shortest substring containing all the characters of another string. 
+    * what if all strings are unique
+    * what if they are not unique?
