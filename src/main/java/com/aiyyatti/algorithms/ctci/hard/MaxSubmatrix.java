@@ -1,67 +1,64 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import java.util.Arrays;
 
+import static java.lang.Math.max;
+import static junit.framework.TestCase.assertEquals;
+import static org.slf4j.LoggerFactory.getLogger;
+
+/**
+ * Source: Cracking The Coding Interview.
+ * Time:
+ * Todo:
+ * Redo: Yes
+ * Notes:
+ */
 public class MaxSubmatrix {
-    boolean isDebug = true;
+    private static final Logger logger = getLogger(MaxSubmatrix.class);
 
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
-    public void testCtci() {
-        int a[][] = new int[][]{
-                new int[]{-9, -7, 8},
-                new int[]{-3, 7, 6},
-                new int[]{-6, 1, 4}
+    public void simpleTest() {
+        int[][] matrix = new int[][]{
+                new int[]{1, 2, -1, -3, 4},
+                new int[]{-2, -1, 3, -2, 2},
+                new int[]{1, -1, -2, 5, 3},
+                new int[]{2, -1, 1, -2, 3}
         };
-        System.out.println(doMaxSubmatrix(a));
+        assertEquals(12, doMaxSubmatrix(matrix));
     }
 
-    @Test
-    public void testMaxSubmatrix() {
-        int a[][] = new int[][]{
-                new int[]{-1, 3, 2, 6, 2, 1 - 5},
-                new int[]{-5, 2, 6, -7, 8, 3, 6},
-                new int[]{-5, -3, -7, -9, -2, -6, -8},
-                new int[]{1, 7, 3, 1, -9, 2, 1},
-                new int[]{3, 2, -7, -1, 6, -8, 4},
-                new int[]{-5, -7, -2, 1, 8, 2, -1},
-        };
-        System.out.println(doMaxSubmatrix(a));
-    }
-
-    /**
-     * brute force is when not doing Kadanes. the TC goes to O(N^4) else its O(N^3)
-     *
-     * @param a
-     * @return
-     */
+    //////////////
+    // SOLUTION //
+    //////////////
     public int doMaxSubmatrix(int[][] a) {
-        int N = a.length;
-        int max = Integer.MIN_VALUE;
-        for (int index = 0; index < N; index++) {
-            int sum[] = new int[N];
-            for (int row = index; row < N; row++) {
-                for (int column = 0; column < N; column++) {
-                    sum[column] += a[row][column];
+        int returnSum = Integer.MIN_VALUE;
+        int rowN = a.length;
+        int colN = a[0].length;
+        System.out.println(rowN + "::" + colN);
+        for (int i = 0; i < rowN; i++) {
+            for (int j = i; j < rowN; j++) {
+                int[] sum = new int[colN];
+                for (int k = i; k <= j; k++) {
+                    for (int col = 0; col < colN; col++) {
+                        sum[col] += a[k][col];
+                    }
                 }
-                max = Math.max(max, doKadanes(sum));
-                if (isDebug) {
-                    System.out.printf("found a new max %s at (rows:%s to rows:%s) Array:%s \n", max, index, row, Arrays.toString(sum));
+                int maxSum = sum[0];
+                int localSum = sum[0];
+                for (int col = 1; col < colN; col++) {
+                    localSum = max(localSum + sum[col], sum[col]);
+                    maxSum = max(maxSum, localSum);
                 }
+                returnSum = max(returnSum, maxSum);
+                System.out.printf("%s to %s , %s -> %s\n", i, j, Arrays.toString(sum), returnSum);
             }
         }
-        return max;
-    }
-
-    public int doKadanes(int[] a) {
-        int N = a.length;
-        int sum = a[0];
-        int max = sum;
-        for (int i = 1; i < N; i++) {
-            sum = Math.max(sum + a[i], a[i]);
-            max = Math.max(sum, max);
-        }
-        return max;
+        return returnSum;
     }
 }

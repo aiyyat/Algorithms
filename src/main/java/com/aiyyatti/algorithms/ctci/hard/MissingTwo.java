@@ -11,8 +11,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Redo: Yes
  * Notes:
  */
-public class WordTransformer {
-    private static final Logger logger = getLogger(WordTransformer.class);
+public class MissingTwo {
+    private static final Logger logger = getLogger(MissingTwo.class);
     ///////////////
     // TEST CASE //
     ///////////////

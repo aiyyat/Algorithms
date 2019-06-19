@@ -1,11 +1,24 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
 import org.junit.Test;
+import org.slf4j.Logger;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.slf4j.LoggerFactory.getLogger;
+
+/**
+ * Source: Cracking The Coding Interview.
+ * Time:
+ * Todo: circluar
+ * Redo: Yes
+ * Notes:
+ */
 public class BiNode {
-    ////////////////
-    // TEST CASES //
-    ////////////////
+    private static final Logger logger = getLogger(Bi.class);
+
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
     public void simpleTest() {
         Node n0 = new Node(0);
@@ -15,63 +28,59 @@ public class BiNode {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        n4.left = n2;
-        n4.right = n5;
-        n2.left = n1;
-        n2.right = n3;
-        n1.left = n0;
-        n4.right = n5;
-        n5.right = n6;
-        Node result = doBiNode(n4);
-        System.out.println(result);
-        System.out.println(result.from());
-        System.out.println(result.from().from());
-        System.out.println(result.from().from().from());
-        System.out.println(result.from().from().from().from());
-        System.out.println(result.from().from().from().from().from());
-        System.out.println(result.from().from().from().from().from().from());
-        System.out.println(result.from().from().from().from().from().from().from());
-        System.out.println(result.from().from().from().from().from().from());
-        System.out.println(result.from().from().from().from().from().from().to());
-        System.out.println(result.from().from().from().from().from().from().to().to());
-        System.out.println(result.from().from().from().from().from().from().to().to().to());
-        System.out.println(result.from().from().from().from().from().from().to().to().to().to());
-        System.out.println(result.from().from().from().from().from().from().to().to().to().to().to());
-        System.out.println(result.from().from().from().from().from().from().to().to().to().to().to().to());
-        System.out.println(result.from().from().from().from().from().from().to().to().to().to().to().to().to());
+        Node n7 = new Node(7);
+        Node n8 = new Node(8);
+        n4.left(n2);
+        n2.left(n1);
+        n1.left(n0);
+        n6.left(n5);
+        n4.right(n6);
+        n2.right(n3);
+        n6.right(n7);
+        Bi bi = convert(n4);
+        Bi zero = bi.prev().prev().prev().prev();
+        assertThat(zero.data).isEqualTo(0);
+        assertThat(zero.next().data).isEqualTo(1);
+        assertThat(zero.next().next().data).isEqualTo(2);
+        assertThat(zero.next().next().next().data).isEqualTo(3);
+        assertThat(zero.next().next().next().next().data).isEqualTo(4);
+        assertThat(zero.next().next().next().next().next().data).isEqualTo(5);
+        assertThat(zero.next().next().next().next().next().next().data).isEqualTo(6);
+        Bi seven = zero.next().next().next().next().next().next().next();
+        assertThat(seven.data).isEqualTo(7);
+        assertThat(seven.prev().data).isEqualTo(6);
     }
 
-    public Node doBiNode(Node root) {
+    //////////////
+    // SOLUTION //
+    //////////////
+    public Bi convert(Node root) {
         if (root == null) return null;
-        Node left = doBiNode(root.left);
-        Node right = root.right;
-        Node rightXtreme = doBiNode(right);
-        if (left != null) {
-            left.to(root);
-            root.from(left);
+        Bi leftRoot = convert(root.left);
+        Bi rightRoot = convert(root.right);
+        return connect(leftRoot, root, rightRoot);
+    }
+
+    public Bi connect(Bi left, Node root, Bi right) {
+        while (left != null && left.next != null) {
+            left = left.next;
         }
-        if (right != null) {
-            root.to(right);
-            right.from(root);
-            return rightXtreme;
+        while (right != null && right.prev != null) {
+            right = right.prev;
         }
-        return root;
+        Bi biRoot = new Bi(root.data);
+        biRoot.prev(left);
+        biRoot.next(right);
+        if (left != null) left.next(biRoot);
+        if (right != null) right.prev(biRoot);
+        return biRoot;
     }
 
     class Node {
         int data;
-        Node left;
-        Node right;
+        Node left, right;
 
         public Node(int data) {
-            this.data = data;
-        }
-
-        public int data() {
-            return data;
-        }
-
-        public void data(int data) {
             this.data = data;
         }
 
@@ -79,8 +88,8 @@ public class BiNode {
             return left;
         }
 
-        public void left(Node node1) {
-            this.left = node1;
+        public void left(Node left) {
+            this.left = left;
         }
 
         public Node right() {
@@ -91,25 +100,48 @@ public class BiNode {
             this.right = right;
         }
 
-        public Node to() {
-            return left;
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data=" + data +
+                    '}';
+        }
+    }
+
+    class Bi {
+        Bi next, prev;
+        int data;
+
+        public Bi(int data) {
+            this.data = data;
         }
 
-        public void to(Node node1) {
-            this.left = node1;
+        public Bi(Bi next, Bi prev) {
+            this.next = next;
+            this.prev = prev;
         }
 
-        public Node from() {
-            return right;
+        public Bi next() {
+            return next;
         }
 
-        public void from(Node right) {
-            this.right = right;
+        public void next(Bi next) {
+            this.next = next;
+        }
+
+        public Bi prev() {
+            return prev;
+        }
+
+        public void prev(Bi prev) {
+            this.prev = prev;
         }
 
         @Override
         public String toString() {
-            return "" + data;
+            return "Bi{" +
+                    "data=" + data +
+                    '}';
         }
     }
 }

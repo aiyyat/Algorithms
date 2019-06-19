@@ -1,54 +1,55 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
-import junit.framework.TestCase;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * TODO: Revise logic.
- * Note: it works well with negative numbers as well.
+ * Source: Cracking The Coding Interview.
+ * Time: 10.41
+ * Todo:
+ * Redo: No
  */
 public class AddWithoutPlus {
-    ////////////////
-    // TEST CASES //
-    ////////////////
-    @Test
-    public void ctciTest() {
-        TestCase.assertEquals(1406, doAddWithoutPlus(759, 647));
-    }
+    private static final Logger logger = LoggerFactory.getLogger(AddWithoutPlus.class);
 
-    public void simple1Test() {
-        TestCase.assertEquals(12, doAddWithoutPlus(7, 5));
+    ///////////////
+    // TEST CASE //
+    ///////////////
+    @Test
+    public void simpleTest1() {
+        assertThat(doAddWithoutPlus(3, 5)).isEqualTo(8);
     }
 
     @Test
-    public void simple2Test() {
-        TestCase.assertEquals(-2, doAddWithoutPlus(-7, 5));
+    public void simpleTest2() {
+        assertThat(doAddWithoutPlus(3, 0)).isEqualTo(3);
     }
 
     @Test
-    public void simple3Test() {
-        TestCase.assertEquals(2, doAddWithoutPlus(7, -5));
+    public void simpleTest3() {
+        assertThat(doAddWithoutPlus(0, 5)).isEqualTo(5);
     }
 
     @Test
-    public void simple5Test() {
-        TestCase.assertEquals(-12, doAddWithoutPlus(-7, -5));
+    public void simpleTest4() {
+        assertThat(doAddWithoutPlus(-3, -5)).isEqualTo(-8);
     }
 
-    @Test
-    public void simple4Test() {
-        TestCase.assertEquals(7, doAddWithoutPlus(7, 0));
-    }
-
-    public int doAddWithoutPlus(int num1, int num2) {
-        int sumWithoutCarry = num1 ^ num2;
-        int carryWithoutSum = (num1 & num2) << 1;
-        while (carryWithoutSum != 0) {
-            int tempSumWithoutCarry = sumWithoutCarry ^ carryWithoutSum;
-            int tempCarryWithoutSum = (sumWithoutCarry & carryWithoutSum) << 1;
-            sumWithoutCarry = tempSumWithoutCarry;
-            carryWithoutSum = tempCarryWithoutSum;
+    //////////////
+    // SOLUTION //
+    //////////////
+    public int doAddWithoutPlus(int a, int b) {
+        int s = a;
+        int c = b;
+        while (c != 0) {
+            a = s;
+            b = c;
+            s = a ^ b;
+            c = (a & b) << 1;
         }
-        return sumWithoutCarry;
+        return s;
     }
 }

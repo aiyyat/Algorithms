@@ -8,11 +8,11 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Source: Cracking The Coding Interview.
  * Time:
  * Todo:
- * Redo: Yes
+ * Redo: No
  * Notes:
  */
-public class WordTransformer {
-    private static final Logger logger = getLogger(WordTransformer.class);
+public class TheMasseuse {
+    private static final Logger logger = getLogger(TheMasseuse.class);
     ///////////////
     // TEST CASE //
     ///////////////

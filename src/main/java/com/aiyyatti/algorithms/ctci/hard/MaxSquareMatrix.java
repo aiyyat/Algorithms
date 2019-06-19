@@ -1,74 +1,104 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
-import junit.framework.TestCase;
 import org.junit.Test;
+import org.slf4j.Logger;
 
-import java.util.Arrays;
+import static java.lang.Math.min;
+import static org.slf4j.LoggerFactory.getLogger;
 
-import static junit.framework.TestCase.assertEquals;
-
+/**
+ * Source: Cracking The Coding Interview.
+ * Time:
+ * Todo:
+ * Redo: Yes
+ * Notes:
+ */
 public class MaxSquareMatrix {
-    boolean B = true;
-    boolean W = false;
-    boolean isDebug;
+    private static final Logger logger = getLogger(MaxSquareMatrix.class);
+    ///////////////
+    // TEST CASE //
+    ///////////////
+    static final int B = 0;
+    static final int W = 1;
 
     @Test
     public void simpleTest() {
-        boolean[][] matrix = new boolean[][]{
-                new boolean[]{W, B, W},
-                new boolean[]{B, B, W},
-                new boolean[]{B, B, W}
+        int[][] square = new int[][]{
+                new int[]{B, B, W, B, W, B, W, B},
+                new int[]{W, W, B, B, B, B, B, B},
+                new int[]{B, W, W, B, W, W, B, B},
+                new int[]{W, B, W, B, W, W, B, B},
+                new int[]{B, W, W, B, B, B, B, B},
+                new int[]{B, W, W, B, B, B, B, B},
+                new int[]{W, W, W, W, W, W, W, W},
+                new int[]{W, W, W, W, W, W, W, W}
         };
-        assertEquals(2, doMaxSquareMatrix(matrix));
+        System.out.println(findMaxSqureMatrix(square));
     }
 
-    public int doMaxSquareMatrix(boolean[][] a) {
+    //////////////
+    // SOLUTION //
+    //////////////
+    public int findMaxSqureMatrix(int[][] a) {
         int N = a.length;
-        BlackMatrix[][] lookup = new BlackMatrix[N][N];
         int max = 0;
+        Cell[][] cell = new Cell[a.length][a.length];
         for (int row = N - 1; row >= 0; row--) {
             for (int col = N - 1; col >= 0; col--) {
-                if (!a[row][col]) lookup[row][col] = new BlackMatrix();
-                else {
-                    int below = (row + 1) > N - 1 ? 1 : lookup[row + 1][col].row() + 1;
-                    int right = (col + 1) > N - 1 ? 1 : lookup[row][col + 1].column() + 1;
-                    BlackMatrix blackMatrix = new BlackMatrix(below, right);
-                    lookup[row][col] = blackMatrix;
-                    max = Math.max(max, blackMatrix.getSquareMatrix());
+                if (a[row][col] == W) cell[row][col] = new White();
+                else cell[row][col] = new BlackBuilder(cell, row, col).build();
+            }
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (cell[i][j] instanceof Black) {
+                    Black topLeft = (Black) cell[i][j];
+                    int blacks = min(topLeft.rightBlack, topLeft.bottomBlack);
+                    for (int k = 0; k < blacks; k++) {
+                        Cell topRight = cell[i][k + j];
+                        Cell bottomLeft = cell[k + i][j];
+                        if (topRight.bottomBlack >= blacks && bottomLeft.rightBlack >= blacks) {
+                            logger.debug("{} found square: "+blacks);
+                            max = Math.max(blacks, max);
+                        }
+                    }
                 }
             }
         }
-        if (isDebug) Arrays.stream(lookup).forEach(e -> System.out.println(Arrays.toString(e)));
         return max;
     }
 
-    class BlackMatrix {
-        private int row, column;
+    class Cell {
+        int rightBlack = 0, bottomBlack = 0;
+    }
 
-        public BlackMatrix() {
+    class White extends Cell {
 
+    }
+
+    class Black extends Cell {
+        public Black() {
+            this.rightBlack = 1;
+            this.bottomBlack = 1;
         }
+    }
 
-        public BlackMatrix(int row, int column) {
+    class BlackBuilder {
+        Cell[][] matrix;
+        int row = 0, column = 0;
+
+        BlackBuilder(Cell[][] matrix, int row, int column) {
+            this.matrix = matrix;
             this.row = row;
             this.column = column;
         }
 
-        public int getSquareMatrix() {
-            return Math.min(row, column);
-        }
-
-        public int row() {
-            return row;
-        }
-
-        public int column() {
-            return column;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("(%s,%s)", row, column);
+        public Black build() {
+            int N = matrix.length;
+            Black black = new Black();
+            if (row + 1 < N) black.bottomBlack += matrix[row + 1][column].bottomBlack;
+            if (column + 1 < N) black.rightBlack += matrix[row][column + 1].rightBlack;
+            return black;
         }
     }
 }

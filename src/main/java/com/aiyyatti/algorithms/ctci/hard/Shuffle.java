@@ -1,28 +1,63 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
+import org.hamcrest.collection.IsArrayContainingInAnyOrder;
 import org.junit.Test;
+import org.slf4j.Logger;
 
-import java.util.Arrays;
+import java.util.Random;
 
+import static org.apache.commons.lang3.ArrayUtils.toObject;
+import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
+import static org.junit.Assert.assertThat;
+import static org.slf4j.LoggerFactory.getLogger;
+
+/**
+ * Source: Cracking The Coding Interview.
+ * Time: 11.25
+ * Todo:
+ * Redo: No
+ * Notes:
+ */
 public class Shuffle {
-    ////////////////
-    // TEST CASES //
-    ////////////////
+    private static final Logger logger = getLogger(Shuffle.class);
+
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
-    public void shuffleTest() {
-        int[] deck = new int[52];
-        for (int i = 0; i < deck.length; i++) deck[i] = i + 1;
-        doShuffle(deck);
-        System.out.println(Arrays.toString(deck));
+    public void testSimple() {
+        int N = 52;
+        Integer[] expected = new Integer[N];
+        for (int i = 0; i < N; i++) expected[i] = i + 1;
+        IsArrayContainingInAnyOrder l;
+        Integer[] actual = toObject(doShuffle(N));
+        assertThat(actual, arrayContainingInAnyOrder(expected));
     }
 
-    public void doShuffle(int[] deck) {
-        int N = deck.length;
-        for (int i = 0; i < N; i++) {
-            int random = (i + (int) ((52 - i) * Math.random()));
-            int temp = deck[random];
-            deck[random] = deck[i];
-            deck[i] = temp;
+    //////////////
+    // SOLUTION //
+    //////////////
+    public int[] doShuffle() {
+        return doShuffle(52);
+    }
+
+    public int[] doShuffle(int N) {
+        int[] a = new int[N];
+        for (int i = 0; i < N; i++) a[i] = i + 1;
+        for (int i = 0; i < N - 1; i++) {
+            int rand = rand(i + 1, N);
+            swap(a, i, rand);
         }
+        return a;
+    }
+
+    private int rand(int from, int to) {
+        return new Random().nextInt(to - from) + from;
+    }
+
+    private void swap(int a[], int x, int y) {
+        int temp = a[x];
+        a[x] = a[y];
+        a[y] = temp;
     }
 }
