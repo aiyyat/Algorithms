@@ -3,6 +3,8 @@ package com.aiyyatti.algorithms.ctci.treeandgraphs;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import java.util.Objects;
+
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -17,35 +19,6 @@ import static junit.framework.TestCase.assertTrue;
  * right node heights should be 0 or 1
  */
 public class CheckBalanced {
-    /**
-     * return the difference between left and right subtrees if it is 0 or 1 then return that value
-     *
-     * @param root
-     * @return
-     */
-    public boolean doCheckBalanced(Node root) {
-        return heightDiff(root) != Integer.MIN_VALUE;
-    }
-
-    /**
-     * Reserve the MAX_VALUE for a possible value for the height Diff
-     *
-     * @param root
-     * @return
-     */
-    public int heightDiff(Node root) {
-        if (root == null) return -1;
-        else {
-            int heightLeft = heightDiff(root.left);
-            int heightRight = heightDiff(root.right);
-            if (heightLeft == Integer.MIN_VALUE || heightRight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
-            if (Math.abs(heightLeft - heightRight) > 1) {
-                return Integer.MIN_VALUE;
-            }
-            return Math.max(heightLeft, heightRight) + 1;
-        }
-    }
-
     ///////////////
     // TEST CASE //
     ///////////////
@@ -154,6 +127,50 @@ public class CheckBalanced {
         n5.left(n6);
         n5.right(n7);
         TestCase.assertTrue(doCheckBalanced(n0));
+    }
+
+    //////////////
+    // SOLUTION //
+    //////////////
+    Result badResult = new Result(-1, false);
+
+    public boolean doCheckBalanced(Node root) {
+        return doCheckBalancedDoer(root).result;
+    }
+
+    public Result doCheckBalancedDoer(Node root) {
+        if (root == null) return new Result(0, true);
+        Result left = doCheckBalancedDoer(root.left);
+        if (!left.result) return badResult;
+        Result right = doCheckBalancedDoer(root.right);
+        if (!right.result) return badResult;
+        int diff = Math.abs(left.height - right.height);
+        if (diff > 1) return badResult;
+        else return new Result(Math.max(left.height, right.height) + 1, true);
+    }
+
+    class Result {
+        int height = -1;
+        boolean result;
+
+        public Result(int height, boolean result) {
+            this.height = height;
+            this.result = result;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Result result1 = (Result) o;
+            return height == result1.height &&
+                    result == result1.result;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(height, result);
+        }
     }
 
     ////////////////////
