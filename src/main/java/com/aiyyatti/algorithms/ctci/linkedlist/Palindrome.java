@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
@@ -26,44 +27,103 @@ public class Palindrome {
     // TESTCASE //
     //////////////
     @Test
-    public void ctciwithoutDSTest() {
+    public void ctciTest() {
         Node root = new NodeBuilder().add(0).add(1).add(2).add(1).add(0).build();
+        assertTrue(isPalindromeWithStack(root));
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void oddWithOneNodewithoutDSTest() {
+    public void oddWithOneNodeTest() {
         Node root = new NodeBuilder().add(0).build();
+        assertTrue(isPalindromeWithStack(root));
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void evenPalindromewithoutDSTest() {
+    public void evenPalindromeTest() {
         Node root = new NodeBuilder().add(0).add(0).build();
+        assertTrue(isPalindromeWithStack(root));
         assertTrue(isPalindrome(root));
+    }
+    @Test
+    public void nullNodeTest() {
+        Node root = new NodeBuilder().add(0).add(0).build();
+        assertTrue(isPalindromeWithStack(null));
+        assertTrue(isPalindrome(null));
     }
 
     @Test
-    public void evenNotPalindromewithoutDSTest() {
+    public void evenNotPalindromeTest() {
         Node root = new NodeBuilder().add(0).add(1).build();
+        assertFalse(isPalindromeWithStack(root));
         assertFalse(isPalindrome(root));
     }
 
     @Test
-    public void oddMoreThanOneNodePalindromwithoutDSTest() {
+    public void oddMoreThanOneNodePalindromTest() {
         Node root = new NodeBuilder().add(0).add(1).add(0).build();
+        assertTrue(isPalindromeWithStack(root));
         assertTrue(isPalindrome(root));
     }
 
     @Test
-    public void oddMoreThanOneNodeNotPalindromwithoutDSTest() {
+    public void oddMoreThanOneNodeNotPalindromTest() {
         Node root = new NodeBuilder().add(0).add(1).add(2).build();
+        assertFalse(isPalindromeWithStack(root));
         assertFalse(isPalindrome(root));
     }
 
-    ////////////////
-    // APPROACH I //
-    ////////////////
+    /////////////////////
+    // APPROACH I STACK//
+    /////////////////////
+    public boolean isPalindromeWithStack(Node root) {
+        return isPalindromeWithStack(root, count(root));
+    }
+
+    public boolean isPalindromeWithStack(Node root, int total) {
+        Stack<Integer> stack = new Stack<>();
+        int count = 2;
+        while (root != null) {
+            if (total - count >= 0) {
+                stack.push(root.data);
+            } else if (total - count < -1) {
+                if (stack.pop() != root.data) return false;
+            }
+            count += 2;
+            root = root.next;
+        }
+        return true;
+    }
+
+    /////////////////////
+    // APPROACH I STACK//
+    /////////////////////
+    public boolean isPalindrome(Node root) {
+        return isPalindrome(root, count(root) - 2).result;
+    }
+
+    public Result isPalindrome(Node root, int position) {
+        if (position > 0) {
+            Result result = isPalindrome(root.next, position - 2);
+            Node next = result.node.next;
+            boolean outcome = result.result && (next.data == root.data);
+            return new Result(outcome, next);
+        } else if (position == 0) {
+            return new Result(root.next, root.data == root.next.data);
+        } else return new Result(true, root);
+    }
+
+    private int count(Node root) {
+        Node current = root;
+        int count = 0;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
     class Result {
         boolean result;
         Node node;
@@ -77,28 +137,6 @@ public class Palindrome {
             this.node = node;
             this.result = result;
         }
-    }
-
-    //corner - root is null
-    public boolean isPalindrome(Node root) {
-        int count = 0;
-        Node head = root;
-        while (head != null) {
-            count++;
-            head = head.next;
-        }
-        return isPalindrome(root, count - 2).result;
-    }
-
-    public Result isPalindrome(Node root, int position) {
-        // two element case explicitly and even number of 2+ element case.
-        if (position == 0) return new Result(root, root.data == root.next.data);
-        else if (position == -1) return new Result(root.next, true);
-        else if (position > 0) {
-            Result m = isPalindrome(root.next(), position - 2);
-            if (!m.result || root.data != m.node.data) return new Result(false, null);
-            else return new Result(true, m.node.next);
-        } else return new Result(null, false);
     }
 
     class Node {
