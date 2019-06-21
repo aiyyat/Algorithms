@@ -44,19 +44,11 @@ Sorting
 * longest palindrome substring
 * longest increasing subsequence.
 * Kadane
-
+* Is a tree balanced?
 
 
 ~~~
 Sorting:
 ~~~ 
-you may have to find the presence of a character unique 
 if no additional DS is allowed
-you can resort sorting the array(s) of characters and comparing by means of pointers.
-
-#Matrix Rotation:
-This is a tricky question, because intuition can go wrong
-Steps: Rotate outer layer then rotate the inner layer and so on until you reach the middle most element (<N/2 where N is the length or height of the N*N Matrix).
-
-#URLify:
-Start from the end so that the shifts can be minimal.
+you can resort to sorting the array(s) of characters and comparing by means of pointers.
