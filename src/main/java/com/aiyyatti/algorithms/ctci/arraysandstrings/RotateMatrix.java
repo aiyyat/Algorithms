@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * TODO: implementation is very tricky.
  * Things to remember:
@@ -30,8 +32,7 @@ public class RotateMatrix {
                 "[22, 17, 12, 7, 2]\n" +
                 "[23, 18, 13, 8, 3]\n" +
                 "[24, 19, 14, 9, 4]";
-        // Use Assert.assertArrayEquals() instead.
-        TestCase.assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
+        assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
     }
 
     @Test
@@ -49,8 +50,7 @@ public class RotateMatrix {
                 "[4, 3, 2, 1, 0]\n" +
                 "[4, 3, 2, 1, 0]\n" +
                 "[4, 3, 2, 1, 0]";
-        // Use Assert.assertArrayEquals() instead.
-        TestCase.assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
+        assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
     }
 
     @Test
@@ -64,24 +64,18 @@ public class RotateMatrix {
         String expected = "[16, 11, 6]\n" +
                 "[17, 12, 7]\n" +
                 "[18, 13, 8]";
-        // Use Assert.assertArrayEquals() instead.
-        TestCase.assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
+        assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
     }
 
     public void rotate(int[][] a) {
-        int N = a.length - 1;
-        for (int i = 0; i < N / 2; i++) {
-            for (int j = i; j < N - i; j++) {
-                // 2 => temp
-                int temp = a[N - j][N - i];
-                // 1 => 2
-                a[N - j][N - i] = a[i][N - j];
-                // 4 => 1
-                a[i][N - j] = a[j][i];
-                // 3 => 4
-                a[j][i] = a[N - i][j];
-                // temp => 3
-                a[N - i][j] = temp;
+        int N = a.length;
+        for (int layer = 0; layer < N / 2; layer++) {
+            for (int i = layer; i < N - 1 - layer; i++) {
+                int temp = a[layer][N - 1 - i];
+                a[layer][N - 1 - i] = a[i][layer];
+                a[i][layer] = a[N - 1 - layer][i];
+                a[N - 1 - layer][i] = a[N - 1 - i][N - 1 - layer];
+                a[N - 1 - i][N - 1 - layer] = temp;
             }
         }
     }
