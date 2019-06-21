@@ -3,6 +3,8 @@ package com.aiyyatti.algorithms.ctci.linkedlist;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * TODO Tricky - repointing cornercases.
  */
@@ -34,7 +36,7 @@ public class RemoveDups {
         Node expected = o1;
         while (actual != null) {
             System.out.println(actual.data);
-            TestCase.assertEquals(actual.data, expected.data);
+            assertEquals(actual.data, expected.data);
             actual = actual.next();
             expected = expected.next();
         }
@@ -52,7 +54,7 @@ public class RemoveDups {
         o1.next(o2);
         Node expected = o1;
         while (actual != null) {
-            TestCase.assertEquals(actual.data, expected.data);
+            assertEquals(actual.data, expected.data);
             actual = actual.next();
             expected = expected.next();
         }
@@ -61,12 +63,14 @@ public class RemoveDups {
     public void removeDuplicates(Node root) {
         Node current = root;
         while (current != null) {
-            Node runner = current;
-            while (runner.next != null) {
-                if (current.data == runner.next.data) {
-                    runner.next = runner.next.next;
+            Node prev = current, runner = current.next;
+            while (runner != null) {
+                if (current.data == runner.data) {
+                    prev.next = runner.next;
+                    runner = prev.next;
                 } else {
                     runner = runner.next;
+                    prev = prev.next;
                 }
             }
             current = current.next;
