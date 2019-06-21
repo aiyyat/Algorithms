@@ -25,9 +25,9 @@ public class MinimumWindowSubstring {
 
     static Stream mws() {
         return Stream.of(
-                Arguments.of("eadeefdcacdfedfdfe", "edca", "efdca"),
+                Arguments.of("eadeefdcacdfedfdfe", "edca", "acdfe"),
                 Arguments.of("geeksforgeeks", "ork", "ksfor"),
-                Arguments.of("geeksforgeeks", "crack", ""),
+                Arguments.of("geeksforgeeks", "crack", null),
                 Arguments.of("aaad", "d", "d"),
                 Arguments.of("aaad", "a", "a")
         );
@@ -41,32 +41,15 @@ public class MinimumWindowSubstring {
         char[] b = sub.toCharArray();
         int[] freq = freq(b);
         int[] actual = new int['z' - 'a'];
-        int end = 0, start = 0;
+        int end = -1, start = 0;
         String nextMatch = null, bestMatch = null;
         while (true) {
-            System.out.println("before end adj");
-            System.out.println("\t" + str.substring(start, end + 1));
-            System.out.println("\t" + Arrays.toString(freq));
-            System.out.println("\t" + Arrays.toString(actual));
             end = findMatchEnd(end, a, freq, actual);
             if (end == -1) return bestMatch;
             else bestMatch = min(bestMatch, str.substring(start, end + 1));
-            System.out.println("after end adj");
-            System.out.println("\t" + str.substring(start, end + 1));
-            System.out.println("\t" + Arrays.toString(freq));
-            System.out.println("\t" + Arrays.toString(actual));
-
-            System.out.println("before Start adj");
-            System.out.println("\t" + str.substring(start, end + 1));
-            System.out.println("\t" + Arrays.toString(freq));
-            System.out.println("\t" + Arrays.toString(actual));
             start = makeOneMismatch(start, a, freq, actual);
-            System.out.println("after Start adj");
-            System.out.println("\t" + str.substring(start-1, end + 1));
-            System.out.println("\t" + Arrays.toString(freq));
-            System.out.println("\t" + Arrays.toString(actual));
+            bestMatch = min(bestMatch, str.substring(start - 1, end + 1));
 
-            bestMatch = min(bestMatch, str.substring(start-1, end + 1));
         }
     }
 
@@ -97,12 +80,10 @@ public class MinimumWindowSubstring {
         int N = a.length;
         end++;
         while (end < N) {
-            System.out.println("new end"+end);
             if (freq[pos(a[end])] > 0) actual[pos(a[end])]++;
             if (containsAll(freq, actual)) return end;
             end++;
         }
-        System.out.println("No match found..");
         return -1;
     }
 
