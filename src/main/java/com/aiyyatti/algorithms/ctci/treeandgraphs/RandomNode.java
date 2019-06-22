@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * Random Node: You are implementing a binary search tree class from scratch, which, in addition
  * to insert, find, and delete, has a method getRandomNode() which returns a random node
@@ -23,33 +25,17 @@ public class RandomNode {
     //////////////
     @Test
     public void testSimple() {
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Node n6 = new Node(6);
-        Node n7 = new Node(7);
-        Node n8 = new Node(8);
-        Node n9 = new Node(9);
         Tree tree = new Tree(n5);
-        tree.insertInOrder(n3);
-        tree.insertInOrder(n7);
-        tree.insertInOrder(n2);
-        tree.insertInOrder(n1);
-        tree.insertInOrder(n4);
-        tree.insertInOrder(n6);
-        tree.insertInOrder(n8);
-        tree.insertInOrder(n9);
-        TestCase.assertEquals(1, tree.getNode(n5, 1).data);
-        TestCase.assertEquals(2, tree.getNode(n5, 2).data);
-        TestCase.assertEquals(3, tree.getNode(n5, 4).data);
-        TestCase.assertEquals(4, tree.getNode(n5, 3).data);
-        TestCase.assertEquals(5, tree.getNode(n5, 9).data);
-        TestCase.assertEquals(6, tree.getNode(n5, 5).data);
-        TestCase.assertEquals(7, tree.getNode(n5, 8).data);
-        TestCase.assertEquals(9, tree.getNode(n5, 6).data);
-        TestCase.assertEquals(8, tree.getNode(n5, 7).data);
+        tree.insertInOrder(3);
+        tree.insertInOrder(7);
+        tree.insertInOrder(2);
+        tree.insertInOrder(1);
+        tree.insertInOrder(4);
+        tree.insertInOrder(6);
+        tree.insertInOrder(8);
+        tree.insertInOrder(9);
+        for (int i = 1; i <= 9; i++) assertEquals(i, tree.getNode(n5, i).data);
     }
 
     ////////////////////
@@ -62,23 +48,31 @@ public class RandomNode {
             this.root = root;
         }
 
-        public void insertInOrder(Node node) {
-            root.insertAsChild(node);
+        public void insertInOrder(int node) {
+            insertInOrder(root, node);
+        }
+
+        public Node insertInOrder(Node root, int data) {
+            if (root == null) return new Node(data);
+            else {
+                if (data < root.data) {
+                    root.size++;
+                    root.left = insertInOrder(root.left, data);
+                } else root.right = insertInOrder(root.right, data);
+                return root;
+            }
         }
 
         public Node getRandomNode() {
             Random random = new Random();
-            int randomNumber = 0 + random.nextInt(root.size - 1);
-            logger.info("{}", randomNumber);
+            int randomNumber = random.nextInt(root.size - 1);
             return getNode(root, randomNumber);
         }
 
-        public Node getNode(Node currentNode, int nodeNumber) {
-            if (currentNode == null) return null;
-            if (currentNode.size == nodeNumber) return currentNode;
-            int leftSize = currentNode.left == null ? 0 : currentNode.left.size;
-            if (nodeNumber <= leftSize) return getNode(currentNode.left, nodeNumber);
-            else return getNode(currentNode.right, nodeNumber - leftSize);
+        public Node getNode(Node root, int random) {
+            if (random == root.size) return root;
+            else if (random <= root.size) return getNode(root.left, random);
+            else return getNode(root.right, random - root.size);
         }
     }
 
@@ -94,17 +88,6 @@ public class RandomNode {
 
         public Node left() {
             return left;
-        }
-
-        public void insertAsChild(Node node) {
-            this.size++;
-            if (node.data <= this.data) {
-                if (left == null) left(node);
-                else left.insertAsChild(node);
-            } else {
-                if (right == null) right(node);
-                else right.insertAsChild(node);
-            }
         }
 
         public void left(Node left) {

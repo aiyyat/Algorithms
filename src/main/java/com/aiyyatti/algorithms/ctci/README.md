@@ -46,7 +46,8 @@ Sorting
 * Kadane
 * Is a tree balanced?
 * build order - cyclic detection.
-
+* common ancestor
+* removing node from BST.
 ~~~
 Sorting:
 ~~~ 
