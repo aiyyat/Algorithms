@@ -45,7 +45,7 @@ Sorting
 * longest increasing subsequence.
 * Kadane
 * Is a tree balanced?
-
+* build order - cyclic detection.
 
 ~~~
 Sorting:

@@ -69,13 +69,13 @@ public class FirstCommonAncestor {
     }
 
     public Node lookInOOfN(Node root, Node a, Node b) {
-        if (root == null || root == a || root == b) return root;
+        if (root == null) return null;
         Node first = lookInOOfN(root.left, a, b);
         Node second = lookInOOfN(root.right, a, b);
-        if (first == null && second == null) return null;
-        else if (first == null || second == null) {
-            return first == null ? second : first;
-        } else return root;
+        if (first != null && second != null) return root;
+        else if (root == a || root == b) return root;
+        else if (first != null) return first;
+        else return second;
     }
 
     ////////////////
