@@ -44,12 +44,25 @@ Sorting
 * longest palindrome substring
 * longest increasing subsequence.
 * Kadane
-* Is a tree balanced?
+* Is a tree balanced? 
+* Validate BST
 * build order - cyclic detection.
 * common ancestor
 * removing node from BST.
+* random node.
 ~~~
 Sorting:
 ~~~ 
 if no additional DS is allowed
 you can resort to sorting the array(s) of characters and comparing by means of pointers.
+
+```
+Tree
+```
+binary recursion operation -  start>end - termination
+Hanoi
+
+skipped recursion.
+skipped bit
+count number of 2s.
+langtons ant
