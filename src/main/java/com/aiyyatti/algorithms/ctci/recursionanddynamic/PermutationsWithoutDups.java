@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * TODO two ways to do it. go thru both.
  */
@@ -15,25 +17,25 @@ public class PermutationsWithoutDups {
     @Test
     public void simpleCtciApproachTest1() {
         String str = "abc";
-        TestCase.assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
+        assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
     }
 
     @Test
     public void simpleCtciApproachTest3() {
         String str = "ab";
-        TestCase.assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
+        assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
     }
 
     @Test
     public void simpleCtciApproachTest4() {
         String str = "a";
-        TestCase.assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
+        assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
     }
 
     @Test
     public void simpleCtciApproachTest2() {
         String str = "abcdefgh";
-        TestCase.assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
+        assertEquals(factorial(str), doPermutationsWithoutDupsCtci(str).size());
     }
 
     public int factorial(String str) {
@@ -67,7 +69,7 @@ public class PermutationsWithoutDups {
         for (int i = index; i < N; i++) {
             char ith = str.charAt(i);
             // or substring of 0 to i and put ith in the end?
-            output.addAll(doPermutationsWithoutDupsCtci(str.substring(0, index) + ith + str.substring(index, i) + str.substring(i + 1), index + 1));
+            output.addAll(doPermutationsWithoutDupsCtci(str.substring(0, i) + ith + str.substring(i + 1), index + 1));
         }
         return output;
     }

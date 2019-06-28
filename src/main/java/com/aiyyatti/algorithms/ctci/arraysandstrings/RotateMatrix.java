@@ -6,8 +6,15 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
- * TODO: very tricky problem. tip: do not use start and end. atleast dont precalculate end or the offset will be included twice.
+ * TODO: implementation is very tricky.
+ * Things to remember:
+ * 1) Approach the problem with a 5*5 matrix. this is to test the edge cases of (1) inner layer (2) single middle element.
+ * 2) Represent each edge with a number this way you can recheck individual edge rotation
+ * 3) Rotation transformation (or movement of each element of that group) the order is important.
+ * 4) after each edge rotation "RECHECK" it with a value of the inner matrix.
  */
 public class RotateMatrix {
     @Test
@@ -25,8 +32,7 @@ public class RotateMatrix {
                 "[22, 17, 12, 7, 2]\n" +
                 "[23, 18, 13, 8, 3]\n" +
                 "[24, 19, 14, 9, 4]";
-        // Use Assert.assertArrayEquals() instead.
-        TestCase.assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
+        assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
     }
 
     @Test
@@ -44,8 +50,7 @@ public class RotateMatrix {
                 "[4, 3, 2, 1, 0]\n" +
                 "[4, 3, 2, 1, 0]\n" +
                 "[4, 3, 2, 1, 0]";
-        // Use Assert.assertArrayEquals() instead.
-        TestCase.assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
+        assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
     }
 
     @Test
@@ -59,19 +64,18 @@ public class RotateMatrix {
         String expected = "[16, 11, 6]\n" +
                 "[17, 12, 7]\n" +
                 "[18, 13, 8]";
-        // Use Assert.assertArrayEquals() instead.
-        TestCase.assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
+        assertEquals(expected, Arrays.stream(matrix).map(e -> Arrays.toString(e)).collect(Collectors.joining("\n")));
     }
 
     public void rotate(int[][] a) {
         int N = a.length;
-        for (int start = 0; start < N / 2; start++) {
-            for (int i = start; i < N - 1 - start; i++) {
-                int temp = a[start][i];
-                a[start][i] = a[N - 1 - i][start];
-                a[N - 1 - i][start] = a[N - 1 - start][N - 1 - i];
-                a[N - 1 - start][N - 1 - i] = a[i][N - 1 - start];
-                a[i][N - 1 - start] = temp;
+        for (int layer = 0; layer < N / 2; layer++) {
+            for (int i = layer; i < N - 1 - layer; i++) {
+                int temp = a[layer][N - 1 - i];
+                a[layer][N - 1 - i] = a[i][layer];
+                a[i][layer] = a[N - 1 - layer][i];
+                a[N - 1 - layer][i] = a[N - 1 - i][N - 1 - layer];
+                a[N - 1 - i][N - 1 - layer] = temp;
             }
         }
     }

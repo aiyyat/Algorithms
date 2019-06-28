@@ -1,11 +1,11 @@
 package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
-import junit.framework.TestCase;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +20,34 @@ public class BuildOrder {
     //////////////
     // SOLUTION //
     //////////////
+    public List<Project> doBuildOrder(List<Project> projects) {
+        List<Project> startOnes = getZeroDepsOnes(projects);
+        List<Project> output = new LinkedList<>();
+        build(startOnes, output);
+        if (projects.size() > output.size()) throw new RuntimeException("Cyclic");
+        return output;
+    }
+
+    public void build(List<Project> projects, List<Project> output) {
+        if (projects.size() == 0) return;
+        for (Iterator<Project> itr = projects.iterator(); itr.hasNext(); ) {
+            Project project = itr.next();
+            if (project.zeroDepCount()) {
+                output.add(project);
+                for (Project child : project.children) child.decrementDeps();
+                build(project.children, output);
+            }
+        }
+    }
+
+    public List<Project> getZeroDepsOnes(List<Project> projects) {
+        List<Project> output = new LinkedList<>();
+        for (Project project : projects) {
+            if (project.zeroDepCount()) output.add(project);
+        }
+        return output;
+    }
+
     class Project {
         String name;
         LinkedList<Project> children = new LinkedList<>();
@@ -29,61 +57,30 @@ public class BuildOrder {
             this.name = name;
         }
 
-        public int incrementParentDependencyCount() {
+        public int incrementDeps() {
             return parentDependencyCount++;
         }
 
-        public int decrementParentDependencyCount() {
-            return parentDependencyCount--;
+        public void decrementDeps() {
+            parentDependencyCount--;
+        }
+
+        public int getDepCount() {
+            return parentDependencyCount;
+        }
+
+        public boolean zeroDepCount() {
+            return parentDependencyCount == 0;
         }
 
         public void addChild(Project b) {
             children.add(b);
-            b.incrementParentDependencyCount();
+            b.incrementDeps();
         }
 
         @Override
         public String toString() {
             return name;
-        }
-    }
-
-    class ProjectBuilder {
-        List<Project> projects = new LinkedList<>();
-
-        public ProjectBuilder(List<Project> projects) {
-            this.projects = projects;
-        }
-
-        public Project[] build() {
-            int N = projects.size();
-            Project[] output = new Project[N];
-            int buildTo = 0;
-            int buildFrom = 0;
-            buildTo = zeroDeps(projects, output, buildTo);
-            while (true) {
-                if (buildTo == buildFrom) {
-                    if (buildTo < N) throw new RuntimeException("Cyclic");
-                    else return output;
-                }
-                for (; buildFrom < buildTo; buildFrom++) {
-                    List<Project> children = output[buildFrom].children;
-                    for (Project child : children) {
-                        child.decrementParentDependencyCount();
-                    }
-                    buildTo = zeroDeps(children, output, buildTo);
-                }
-            }
-        }
-
-        public int zeroDeps(List<Project> projects, Project[] output, int buildTo) {
-            for (Project project : projects) {
-                if (project.parentDependencyCount == 0) {
-                    output[buildTo] = project;
-                    buildTo++;
-                }
-            }
-            return buildTo;
         }
     }
 
@@ -110,7 +107,7 @@ public class BuildOrder {
         projects.add(d);
         projects.add(e);
         projects.add(f);
-        assertEquals("[e, f, b, a, d, c]", Arrays.toString(new ProjectBuilder(projects).build()));
+        assertEquals("[e, f, b, a, d, c]", doBuildOrder(projects).toString());
     }
 
     @Rule
@@ -139,7 +136,7 @@ public class BuildOrder {
         projects.add(d);
         projects.add(e);
         projects.add(f);
-        new ProjectBuilder(projects).build();
+        doBuildOrder(projects);
     }
 
 }

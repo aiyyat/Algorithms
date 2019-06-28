@@ -1,157 +1,129 @@
 package com.aiyyatti.algorithms.ctci.hard;
 
-import junit.framework.TestCase;
 import org.junit.Test;
+import org.slf4j.Logger;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * TODO: if you dont get the implementation of Graph right, you will never get this problem right.
+ * Source: Cracking The Coding Interview.
+ * Time: 45.39
+ * Todo:
+ * Redo: No
+ * Notes:
  */
 public class BabyNames {
-    ////////////////
-    // TEST CASES //
-    ////////////////
+    private static final Logger logger = getLogger(BabyNames.class);
+
+    ///////////////
+    // TEST CASE //
+    ///////////////
     @Test
     public void ctciTest() {
-        Node john = new Node("John", 15);
-        Node jon = new Node("Jon", 15);
-        Node chris = new Node("Chris", 15);
-        Node kris = new Node("Kris", 15);
-        Node christopher = new Node("Christopher", 15);
-        LinkedList<Node> list = new LinkedList<>();
-        list.add(john);
-        list.add(jon);
-        list.add(chris);
-        list.add(kris);
-        list.add(christopher);
-        Graph graph = new Graph(list, new String[][]{
+        Map<String, Integer> names = new HashMap<>();
+        names.put("Jon", 10);
+        names.put("John", 14);
+        names.put("Johnny", 3);
+        names.put("Johny", 12);
+        names.put("Simple", 22);
+        names.put("Simon", 20);
+        names.put("Silly", 3);
+        names.put("Sally", 3);
+        names.put("Susie", 9);
+        names.put("Daniel", 9);
+        names.put("Craig", 19);
+        String[][] connections = new String[][]{
                 new String[]{"Jon", "John"},
-                new String[]{"John", "Johnny"},
-                new String[]{"Chris", "Kris"},
-                new String[]{"Chris", "Christopher"}
-        });
-        BabyNamesDS nameDS = new BabyNamesDS(graph);
-        HashMap<String, Integer> expected = new HashMap<>();
-        expected.put("Kris", 45);
-        expected.put("Johnny", 30);
-        Map<String, Integer> actual = nameDS.babyNames();
-        for (String name : actual.keySet()) {
-            System.out.println(name + " " + actual.get(name));
-            TestCase.assertEquals(expected.get(name), actual.get(name));
-        }
+                new String[]{"Johny", "Johnny"},
+                new String[]{"John", "Johny"},
+                new String[]{"Simple", "Simon"},
+                new String[]{"Susie", "Sally"},
+                new String[]{"Silly", "Sally"}};
+        Map<String, Integer> john = new HashMap<>();
+        john.put("John", 39);
+        john.put("Johnny", 39);
+        john.put("Johny", 39);
+        john.put("Jon", 39);
+        john.put("John", 39);
+        System.out.println(doBabyNames(names, connections));
+        assertThat(doBabyNames(names, connections)).containsAnyOf(
+                Map.entry("Jon", 39),
+                Map.entry("John", 39),
+                Map.entry("Johny", 39),
+                Map.entry("Johnny", 39)
+        );
     }
 
-    @Test
-    public void ctci2Test() {
-        LinkedList<Node> list = new LinkedList<>();
-        list.add(new Node("John", 10));
-        list.add(new Node("Jon", 3));
-        list.add(new Node("Davis", 2));
-        list.add(new Node("Kari", 3));
-        list.add(new Node("Johnny", 11));
-        list.add(new Node("Carlton", 8));
-        list.add(new Node("Carleton", 2));
-        list.add(new Node("Jonathan", 9));
-        list.add(new Node("Carrie", 5));
-        Graph graph = new Graph(list, new String[][]{
-                new String[]{"Jonathan", "John"},
-                new String[]{"Jon", "Johnny"},
-                new String[]{"Johnny", "John"},
-                new String[]{"Kari", "Carrie"},
-                new String[]{"Carleton", "Carlton"}
-        });
-        BabyNamesDS nameDS = new BabyNamesDS(graph);
-        HashMap<String, Integer> expected = new HashMap<>();
-        expected.put("Johnny", 33);
-        expected.put("Carrie", 8);
-        expected.put("Davis", 2);
-        expected.put("Carleton", 10);
-        Map<String, Integer> actual = nameDS.babyNames();
-        for (String name : actual.keySet()) {
-            System.out.println(name + " " + actual.get(name));
-            TestCase.assertEquals(expected.get(name), actual.get(name));
+    //////////////
+    // SOLUTION //
+    //////////////
+    public Map<String, Integer> doBabyNames(Map<String, Integer> names, String[][] connections) {
+        Map<String, Integer> output = new HashMap<>();
+        Map<String, Name> map = new HashMap<>();
+        Set<String> visited = new HashSet<>();
+        for (Iterator<String> itr = names.keySet().iterator(); itr.hasNext(); ) {
+            String name = itr.next();
+            int count = names.get(name);
+            map.put(name, new Name(count, name));
         }
+        int N = connections.length;
+        for (int i = 0; i < N; i++) {
+            append(map.get(connections[i][0]), map.get(connections[i][1]));
+        }
+        for (Iterator<String> itr = map.keySet().iterator(); itr.hasNext(); ) {
+            String name = itr.next();
+            if (!visited.contains(name)) {
+                Name current = map.get(name);
+                int count = visit(current, visited);
+                output.put(current.name, count);
+            }
+        }
+        return output;
     }
 
-    class BabyNamesDS {
-        Map<String, Boolean> visited = new HashMap<>();
-        Map<String, String> parent = new HashMap<>();
-        Graph graph;
-
-        public BabyNamesDS(Graph graph) {
-            this.graph = graph;
-            for (String name : graph.lookup.keySet()) {
-                visited.put(name, false);
-                parent.put(name, name);
+    public int visit(Name nameObj, Set<String> visited) {
+        int count = 0;
+        if (!visited.contains(nameObj.name)) {
+            count = nameObj.count;
+            visited.add(nameObj.name);
+            for (Iterator<Name> iterator = nameObj.neighbours.iterator(); iterator.hasNext(); ) {
+                Name neighbour = iterator.next();
+                count += visit(neighbour, visited);
             }
         }
-
-        public HashMap<String, Integer> babyNames() {
-            HashMap<String, Integer> root = new HashMap<>();
-            for (String name : graph.lookup.keySet()) {
-                if (!visited.get(name)) {
-                    root.put(name, freqOf(name));
-                }
-            }
-            return root;
-        }
-
-        public int freqOf(String name) {
-            int freq = graph.node(name).freq;
-            visited.put(name, true);
-            for (String adjacent : graph.adjacents(name)) if (!visited.get(adjacent)) freq += freqOf(adjacent);
-
-            return freq;
-        }
+        return count;
     }
 
-    class Graph {
-        Map<String, Node> lookup = new HashMap<>();
-        Map<String, LinkedList<String>> adjacents = new HashMap<>();
-
-        Graph(LinkedList<Node> nodes, String[][] links) {
-            for (Node node : nodes) {
-                lookup.put(node.name, node);
-                adjacents.put(node.name, new LinkedList<>());
-            }
-            for (String[] pair : links) {
-                link(pair[0], pair[1]);
-                link(pair[1], pair[0]);
-            }
-        }
-
-        public void link(String side1, String side2) {
-            LinkedList<String> list1 = null;
-            if (null == (list1 = adjacents.get(side1))) {
-                list1 = new LinkedList<>();
-                adjacents.put(side1, list1);
-            }
-            if (null == lookup.get(side1)) {
-                lookup.put(side1, new Node(side1, 0));
-            }
-            adjacents.get(side1).add(side2);
-        }
-
-
-        public Node node(String name) {
-            return lookup.get(name);
-        }
-
-        public LinkedList<String> adjacents(String name) {
-            return adjacents.get(name);
-        }
+    public void append(Name name1, Name name2) {
+        logger.debug("name1{}, name2{}", name1, name2);
+        name1.addNeighbour(name2);
+        name2.addNeighbour(name1);
     }
 
-    class Node {
+    class Name {
+        List<Name> neighbours = new LinkedList<>();
+        int count;
         String name;
-        int freq;
 
-        public Node(String name, int freq) {
+        public Name(int count, String name) {
+            this.count = count;
             this.name = name;
-            this.freq = freq;
+        }
+
+        public void addNeighbour(Name name) {
+            neighbours.add(name);
+        }
+
+        @Override
+        public String toString() {
+            return "Name{" +
+                    "count=" + count +
+                    ", name='" + name + '\'' +
+                    '}';
         }
     }
+
 }

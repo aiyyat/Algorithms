@@ -1,9 +1,9 @@
 package com.aiyyatti.algorithms.ctci.treeandgraphs;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 /**
  * Successor: Write an algorithm to find the "next" node (i.e., in-order successor) of a given node in a
@@ -39,20 +39,20 @@ public class Successor {
         n9.right(n10);
         n11.right(n13);
         n13.right(n14);
-        TestCase.assertEquals(4, doSuccessor(n3).data);
-        TestCase.assertEquals(2, doSuccessor(n1).data);
-        TestCase.assertEquals(5, doSuccessor(n4).data);
-        TestCase.assertEquals(3, doSuccessor(n2).data);
-        TestCase.assertEquals(13, doSuccessor(n12).data);
-        TestCase.assertEquals(9, doSuccessor(n8).data);
-        TestCase.assertEquals(14, doSuccessor(n13).data);
-        TestCase.assertEquals(12, doSuccessor(n11).data);
-        TestCase.assertEquals(8, doSuccessor(n7).data);
-        TestCase.assertEquals(6, doSuccessor(n5).data);
-        TestCase.assertEquals(7, doSuccessor(n6).data);
-        TestCase.assertEquals(10, doSuccessor(n9).data);
-        TestCase.assertEquals(11, doSuccessor(n10).data);
-        TestCase.assertNull(doSuccessor(n14));
+        assertEquals(4, doSuccessor(n3).data);
+        assertEquals(2, doSuccessor(n1).data);
+        assertEquals(5, doSuccessor(n4).data);
+        assertEquals(3, doSuccessor(n2).data);
+        assertEquals(13, doSuccessor(n12).data);
+        assertEquals(9, doSuccessor(n8).data);
+        assertEquals(14, doSuccessor(n13).data);
+        assertEquals(12, doSuccessor(n11).data);
+        assertEquals(8, doSuccessor(n7).data);
+        assertEquals(6, doSuccessor(n5).data);
+        assertEquals(7, doSuccessor(n6).data);
+        assertEquals(10, doSuccessor(n9).data);
+        assertEquals(11, doSuccessor(n10).data);
+        assertNull(doSuccessor(n14));
     }
 
     @Test
@@ -84,24 +84,72 @@ public class Successor {
         n9.right(n10);
         n11.right(n13);
         n13.right(n14);
-        TestCase.assertEquals(7, doSuccessor(n6).data);
+        assertEquals(7, doSuccessor(n6).data);
+    }
+
+    @Test
+    public void testCase1() {
+        Node n1 = new Node(1);
+        assertNull(doSuccessor(n1));
+    }
+
+    @Test
+    public void testCase2() {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        n1.right(n2);
+        assertNull(doSuccessor(n2));
+    }
+
+    @Test
+    public void testCase3() {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        n1.right(n2);
+        n1.left(n3);
+        assertEquals(1, doSuccessor(n3).data);
+    }
+
+    @Test
+    public void testCase4() {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        n1.right(n2);
+        n1.left(n3);
+        assertEquals(2, doSuccessor(n1).data);
+    }
+
+    @Test
+    public void testCase5() {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        n1.right(n2);
+        n1.left(n3);
+        assertNull(doSuccessor(n2));
     }
 
     public Node doSuccessor(Node root) {
-        Node right = root.right;
-        if (right != null) {
-            Node node = right;
-            while (node.left != null) {
-                node = node.left;
+        if (root.hasRight()) {
+            root = root.right;
+            Node lastLeft = root;
+            while (root.hasLeft()) {
+                lastLeft = root.left;
+                root = root.left;
             }
-            return node;
+            return lastLeft;
         } else {
             Node parent = root.parent;
-            while (parent != null && parent.left != root) {
-                root = parent;
-                parent = root.parent;
+            if (root.isOnLeftOf(parent)) return parent;
+            else {
+                while (root.isOnRightOf(parent)) {
+                    root = parent;
+                    parent = root.parent;
+                }
+                return parent;
             }
-            return parent;
         }
     }
 
@@ -110,6 +158,22 @@ public class Successor {
         Node left;
         Node right;
         Node parent;
+
+        public boolean hasRight() {
+            return right != null;
+        }
+
+        public boolean isOnLeftOf(Node node) {
+            return node == null ? false : node.left == this;
+        }
+
+        public boolean isOnRightOf(Node node) {
+            return node == null ? false : node.right == this;
+        }
+
+        public boolean hasLeft() {
+            return left != null;
+        }
 
         public Node(int data) {
             this.data = data;

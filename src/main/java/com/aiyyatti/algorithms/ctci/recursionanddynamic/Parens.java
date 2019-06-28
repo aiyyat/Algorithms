@@ -3,33 +3,47 @@ package com.aiyyatti.algorithms.ctci.recursionanddynamic;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import static junit.framework.TestCase.assertEquals;
 
 public class Parens {
     @Test
     public void simpleTest() {
-        String expected = "[((((())))), (((()()))), (((())())), (((()))()), (((())))(), ((()(()))), ((()()())), ((()())()), ((()()))(), ((())(())), ((())()()), ((())())(), ((()))(()), ((()))()(), (()((()))), (()(()())), (()(())()), (()(()))(), (()()(())), (()()()()), (()()())(), (()())(()), (()())()(), (())((())), (())(()()), (())(())(), (())()(()), (())()()(), ()(((()))), ()((()())), ()((())()), ()((()))(), ()(()(())), ()(()()()), ()(()())(), ()(())(()), ()(())()(), ()()((())), ()()(()()), ()()(())(), ()()()(()), ()()()()()]";
-        TestCase.assertEquals(expected, doParens(5).toString());
+        String expected = "[()()()()(), (())()()(), ()(())()(), ()()(())(), ()()()(()), (()())()(), ((()))()(), (())(())(), (())()(()), ()(()())(), ()((()))(), ()(())(()), ()()(()()), ()()((())), (()()())(), ((())())(), (()(()))(), (()())(()), ((()()))(), (((())))(), ((()))(()), (())(()()), (())((())), ()(()()()), ()((())()), ()(()(())), ()((()())), ()(((()))), (()()()()), ((())()()), (()(())()), (()()(())), ((()())()), (((()))()), ((())(())), (()(()())), (()((()))), ((()()())), (((())())), ((()(()))), (((()()))), ((((()))))]";
+        assertEquals(expected, doParens(5));
     }
+
     @Test
     public void simple2Test() {
-        String expected = "[((((())))), (((()()))), (((())())), (((()))()), (((())))(), ((()(()))), ((()()())), ((()())()), ((()()))(), ((())(())), ((())()()), ((())())(), ((()))(()), ((()))()(), (()((()))), (()(()())), (()(())()), (()(()))(), (()()(())), (()()()()), (()()())(), (()())(()), (()())()(), (())((())), (())(()()), (())(())(), (())()(()), (())()()(), ()(((()))), ()((()())), ()((())()), ()((()))(), ()(()(())), ()(()()()), ()(()())(), ()(())(()), ()(())()(), ()()((())), ()()(()()), ()()(())(), ()()()(()), ()()()()()]";
-        TestCase.assertEquals(expected, doParens(3).toString());
+        String expected = "[()()(), (())(), ()(()), (()()), ((()))]";
+        assertEquals(expected, doParens(3));
     }
 
-    public List<String> doParens(int N) {
-        return doParens(0, 0, "", N);
+    public void compare(String expected, Set<String> actual) {
+        System.out.println(actual);
     }
 
-    public List<String> doParens(int open, int close, String prefix, int N) {
-        List<String> output = new ArrayList<>();
-        if (prefix.length() == N * 2) {
-            output.add(prefix);
-            return output;
+
+    public Set<String> doParens(int N) {
+        HashSet<String> input = new HashSet<>();
+        input.add("()");
+        return doParens(input, 1, N);
+    }
+
+    public Set<String> doParens(Set<String> input, int at, int N) {
+        if (at == N) return input;
+        Set<String> output = new LinkedHashSet<>();
+        for (Iterator<String> itr = input.iterator(); itr.hasNext(); ) {
+            String paren = itr.next();
+            for (int i = 0; i < paren.length(); i++) {
+                output.add(insertAtPosition(paren, i));
+            }
         }
-        if (open < N) output.addAll(doParens(open + 1, close, prefix + "(", N));
-        if (close < open) output.addAll(doParens(open, close + 1, prefix + ")", N));
-        return output;
+        return doParens(output, at + 1, N);
+    }
+
+    public String insertAtPosition(String str, int i) {
+        return str.substring(0, i) + "()" + str.substring(i);
     }
 }

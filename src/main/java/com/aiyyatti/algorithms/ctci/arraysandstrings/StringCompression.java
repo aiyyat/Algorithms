@@ -9,7 +9,7 @@ public class StringCompression {
     ////////////////
     @Test
     public void simpleTest() {
-        TestCase.assertEquals("", "aaabbcccccccdddefffghhh");
+        TestCase.assertEquals("a3b2c7d3e1f3g1h3", doCompression("aaabbcccccccdddefffghhh"));
     }
 
     @Test
