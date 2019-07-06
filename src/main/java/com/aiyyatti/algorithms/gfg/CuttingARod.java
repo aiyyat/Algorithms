@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.Math.max;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -36,11 +37,9 @@ public class CuttingARod {
                 new int[]{7, 17},
                 new int[]{8, 20}
         };
-        Assertions.assertThat(doCuttingARod(input, 8)).isEqualTo(22);
-    }    ///////////////
-
-    // TEST CASE //
-    ///////////////
+        assertThat(doCuttingARod(input, 8)).isEqualTo(22);
+    }
+    
     @Test
     public void testGFG2() {
         int[][] input = new int[][]{
@@ -53,14 +52,14 @@ public class CuttingARod {
                 new int[]{7, 17},
                 new int[]{8, 20}
         };
-        Assertions.assertThat(doCuttingARod(input, 8)).isEqualTo(24);
+        assertThat(doCuttingARod(input, 8)).isEqualTo(24);
     }
 
     //////////////
     // SOLUTION //
     //////////////
     public int doCuttingARod(int[][] a, int K) {
-        return doCuttingARod(a, 0, 0, 0, K);
+        return doCuttingARod(a, 0, 0, K);
     }
 
     /**
@@ -69,24 +68,22 @@ public class CuttingARod {
      * @param a
      * @param index
      * @param value
-     * @param sum
-     * @param K
+     * @param leftOver
      * @return
      */
-    public int doCuttingARod(int[][] a, int index, int value, int sum, int K) {
-        if (memo.containsKey(sum)) return memo.get(sum)+value;
+    public int doCuttingARod(int[][] a, int index, int value, int leftOver) {
+        if (memo.containsKey(leftOver)) return memo.get(leftOver) + value;
         int N = a.length;
-        int localMax = Integer.MIN_VALUE;
-        for (int i = index; i < N && K >= a[i][0] + sum; i++) {
-            int newSum = a[i][0] + sum;
-            int newValue = a[i][1];
-            if (newSum == K) localMax = max(localMax, newValue);
-            else if (newSum < K) {
-                localMax = max(localMax, doCuttingARod(a, i, newValue, newSum, K));
+        int maxVal = Integer.MIN_VALUE;
+        for (int i = index; i < N; i++) {
+            int nowLeftOver = leftOver - a[i][0];
+            if (nowLeftOver == 0) maxVal = max(maxVal, a[i][1]);
+            else if (nowLeftOver > 0) {
+                maxVal = max(maxVal, doCuttingARod(a, i, a[i][1], nowLeftOver));
             }
         }
-        System.out.printf("sum:%s value:%s \n", sum, localMax);
-        memo.put(sum, localMax);
-        return localMax + value;
+        logger.info("When leftOver is:{} the best value is:{} \n", leftOver, maxVal);
+        memo.put(leftOver, maxVal);
+        return maxVal + value;
     }
 }
